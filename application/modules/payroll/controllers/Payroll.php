@@ -226,7 +226,7 @@
 
 	  				
 	   public function paysheet(){
-		   if($this->session->userdata('is_login')->user_type == 'A'){
+		   if($this->session->userdata('is_login')->user_type == 'A' || $this->session->userdata('is_login')->user_type == 'AC'){
 			   $title['title']	   =	'Claim-Manage Paysheets';
 			   $data['data_dtls']      = $this->PayrollModel->select_paysheet();
                            $title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');

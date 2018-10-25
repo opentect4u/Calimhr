@@ -129,9 +129,9 @@
                 }
               ?>
           </ul>
-        </li>
+	</li>
 
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Claim">
+	<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Claim">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsePayrollPages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-money"></i>
             <span class="nav-link-text">Payroll</span>
@@ -149,8 +149,28 @@
                 }
               ?>
           </ul>
+	</li>
+
+	<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Claim">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseLeavePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-area-chart"></i>
+            <span class="nav-link-text">Leave & Attendance</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseLeavePages">
+              <li>
+                <a class="nav-link" href="<?php echo site_url('leave/leaveStatus')?>">Apply</a>
+              </li>
+              <?php
+                if (($this->session->userdata('loggedin')->user_type != 'E') ) {?>
+                <li>
+                  <a class="nav-link" href=#>Approve</a>
+                </li>
+              <?php
+                }
+              ?>
+          </ul>
         </li>
-        
+
             <?php
 		if ($this->session->userdata('loggedin')->user_type == 'A') {?>
  
