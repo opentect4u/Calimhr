@@ -29,8 +29,7 @@
 		public function applNo($emp_no,$year){
 			$data = $this->db->query("select IfNull(max(appl_no),0) + 1 appl_no
 					  	  from   tm_leave 
-						  where emp_cd      = $emp_no 
-						  and year(appl_dt) = $year");
+						  where  year(appl_dt) = $year");
 
 
 			return $data->row();
@@ -42,6 +41,18 @@
 			$this->db->select('*');
 
 			$data = $this->db->get($tableName);
+
+			return $data->row();
+		}
+
+		public function leaveTransEdit($appl_dt,$appl_no){
+			$this->db->select('*');
+
+			$this->db->where('appl_dt',$appl_dt);
+
+			$this->db->where('appl_no',$appl_no);
+
+			$data = $this->db->get('tm_leave');
 
 			return $data->row();
 		}

@@ -43,8 +43,6 @@
 
 				$aplNo  = $aplNo->appl_no;
 
-				$aplNo  = $userId.$aplNo;
-
 				//echo "<pre>";
 				//var_dump ($aplNo->appl_no);die;
 
@@ -67,7 +65,7 @@
 
 					"leave_type"	=> $this->input->post('lvtype'),
 
-					"reason"	=> $this->input->post('rns'),
+					"reason"	=> trim($this->input->post('rns')),
 
 					"created_by"	=> $userId,
 
@@ -80,7 +78,7 @@
 
 				redirect('leave/leaveStatus');
 			}else{
-				$title['title']         = 'Claim-Apply Leave';
+				$title['title']         = 'Claim-Leave Application';
 
 				$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
 
@@ -95,6 +93,31 @@
                         	$this->load->view('templetes/welcome_footer');
 			}
 		}
+
+		public function editLeave(){
+				$title['title']         = 'Claim-Leave Application';
+
+                                $title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
+
+                                $title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
+
+				$title['total_reject']  = $this->Process->countRejClaim('tm_claim');
+
+				$applDt			= $this->input->get('appl_dt');
+
+				$applNo			= $this->input->get('appl_no');		
+
+				$data['row']		= $this->LeaveModel->leaveTransEdit($applDt,$applNo);
+
+                                $this->load->view('templetes/welcome_header',$title);
+
+                                $this->load->view("application/edit",$data);
+
+                                $this->load->view('templetes/welcome_footer');
+
+
+			
+		}  
 
 		
 		

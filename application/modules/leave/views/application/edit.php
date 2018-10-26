@@ -1,11 +1,11 @@
 <div class="content-wrapper">
   <div class="container-fluid">
-	<h3>Leave Application Form</h3>
+	<h3>Edit Leave Application Form</h3>
 	<hr> 
 	    <form style="max-width:700px;background:#fafafa;
 	    	         padding:30px;box-shadow:1px 1px 25px rgba(0,0,0,0.35);
                          border-radius:10px;border: 2px solid #305a72"
-		  class="form-style-9" method="POST" action="<?php echo site_url('leave/applyLeave');?>"
+		  class="form-style-9" method="POST" action="<?php echo site_url('leave/editLeave');?>"
 	    />
       <ul>
       	<li>
@@ -15,7 +15,7 @@
       	
 		<input type="text" name="appldt" style="width:325px;" 
 		       class = "field-style field-split align-left" 
-		       value ="<?php echo date('d/m/Y');?>" readonly
+		       value ="<?php echo date('d/m/Y',strtotime($row->appl_dt));?>" readonly
 		/>
 
 	 </li>
@@ -37,8 +37,8 @@
                         class="field-style field-split align-left" required>
 
 			<option value = "">Select</option>
-			<option value = "C">Casual Leave</option>
-			<option value = "E">Earn Leave</option>
+			<option value = "C"<?php echo($row->leave_type=='C')?"selected":""?>>Casual Leave</option>
+			<option value = "E"<?php echo($row->leave_type=='E')?"selected":""?>>Earn Leave</option>
 		</select>
 
 		<input type="text" name="lvno" style="width:300px;display:inline;margin-left:5px" 
@@ -61,11 +61,13 @@
  
 
 		<input type = "date" name="frmdt" id="dp1" style="width:325px" 
-		       class="field-style field-split align-left" required
+		       class="field-style field-split align-left" 
+		       value="<?php echo $row->from_dt;?>"required
 		/>
 
 		<input type = "date" name="todt" style = "width:300px;display:inline;margin-left:10px" 
-                       class="field-style field-split" required
+		       class="field-style field-split" 
+		       value="<?php echo $row->to_dt;?>"required
                 />
 
 	</li>
@@ -77,7 +79,7 @@
                        Reason
                 </label>
 
-		<textarea name="rns" style="width:630px;"class="field-style field-split align-left"rows="2"cols="40"required></textarea> 
+		<textarea name="rns" style="width:630px;"class="field-style field-split align-left"rows="2"cols="40"required>"<?php echo $row->reason;?>"</textarea> 
 
 	</li>
 	    
@@ -86,5 +88,3 @@
 	</li>
     </ul>	 
 </form>
-
-

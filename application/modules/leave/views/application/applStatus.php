@@ -64,11 +64,11 @@
 		      ?>
 		  </td>
 
-		      <!--<td><button class="btn btn-primary edit-btn" data-toggle="tooltip" 
-                       		  data-placement="bottom" title="" data-original-title="Edit Application" 
-                       		  onclick="location.href='<?php echo site_url("payroll/editDept?sl_no=$values->sl_no");?>';">
-		                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-		      </td>-->
+		      <td><button class="btn btn-primary edit-btn" data-toggle="tooltip" 
+                       	   data-placement="bottom" title="" data-original-title="Edit Application" 
+                           onclick="location.href='<?php echo site_url("leave/editLeave?appl_dt=$values->appl_dt&appl_no=$values->appl_no");?>';">
+		           <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+		      </td>
 		</tr>
 
                 <?php
