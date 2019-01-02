@@ -506,6 +506,7 @@ class Process extends CI_Model {
 
     public function maxCode($t_name,$var){
     	$this->db->select_max($var);
+    	$this->db->where('year(claim_dt)',date("Y"));
     	$result = $this->db->get($t_name);
     	if($result){
     		return $result->row();
