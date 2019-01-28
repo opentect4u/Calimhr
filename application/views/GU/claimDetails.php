@@ -3,10 +3,10 @@
     $('#dataTable').DataTable( {
        "order": [[ 0, "desc" ],[ 1, "desc" ]]
     });
-    $('#dataTable_filter').hide();
+    //$('#dataTable_filter').hide();
     $('#dataTable_length').hide();
     $('#dataTable_info').hide();
-    $('#dataTable_paginate').hide();
+    //$('#dataTable_paginate').hide();
 } );
 
   function printClaimDtls() {    

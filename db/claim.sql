@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 25, 2018 at 06:50 PM
--- Server version: 5.7.24-0ubuntu0.18.04.1
+-- Generation Time: Jan 24, 2019 at 06:29 PM
+-- Server version: 5.7.25-0ubuntu0.18.04.2
 -- PHP Version: 7.2.10-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -892,7 +892,7 @@ INSERT INTO `m_user_master` (`emp_no`, `user_id`, `password`, `user_type`, `emp_
 (15, '15', '$2y$10$97gwRZ9q3bpDDfQw9C.XC.1npE5Y1X9o3Df7k0uUOiIliIiuboqlC', 'A', 'Nilkantha  Das', 'N', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'Nilkantha  Das', '2018-10-15 13:18:30'),
 (19, '19', '$2y$10$Z7eGNDsAwLHoO5FwQ7wZBeJ8h07aQhtNcdC4XTn4HjmkQZJyquqVG', 'M', 'Amit Kr Singh', 'Y', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'Tanmoy Mondal', '2018-09-11 11:54:26'),
 (30, '30', '$2y$10$835Oh.A9aS6PhbVa2zk4yOWx3DrVMiKWX6j/6mE/jZqY8MkzdfG5a', 'M', 'Subhodip Banerjee', 'Y', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'Tanmoy Mondal', '2018-05-02 15:08:34'),
-(32, '32', '$2y$10$Vftwln93wxMH.PxYqiHutODGVQdQeSAzZLsvciygAqn/cVIX0k7Gq', 'A', 'Tanmoy Mondal', 'Y', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'Aritra  Basu Roy Chowdhury', '2018-05-08 10:40:41'),
+(32, '32', '$2y$10$Vftwln93wxMH.PxYqiHutODGVQdQeSAzZLsvciygAqn/cVIX0k7Gq', 'A', 'Tanmoy Mondal', 'N', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'Aritra  Basu Roy Chowdhury', '2018-05-08 10:40:41'),
 (36, '36', '$2y$10$RZPdLFHUMUj7qUapsQXqUu3ofDNzmrBeCRx/VFb/TLVFt84R50Fpm', 'E', 'Sanjoy Sardar', 'N', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'Subhodip Banerjee', '2018-05-02 16:25:04'),
 (38, '38', '$2y$10$PSJ0NV.BAsEx0vJ8V/PY.emf/Eqwh8tMBe1quxJFKXUaYLMv29gH.', 'E', 'Raja Saha', 'N', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'SYSTEM', '2018-05-02 00:00:00'),
 (41, '41', '$2y$10$RZPdLFHUMUj7qUapsQXqUu3ofDNzmrBeCRx/VFb/TLVFt84R50Fpm', 'E', 'Tulu Rana', 'Y', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'SYSTEM', '2018-05-02 00:00:00'),
@@ -903,7 +903,7 @@ INSERT INTO `m_user_master` (`emp_no`, `user_id`, `password`, `user_type`, `emp_
 (55, '55', '$2y$10$b4w4yzwgacW7uHTGkGHEnOtRWqZVkn8O9lb67r56AwTAb74sGKM5q', 'E', 'Nabin Halder', 'N', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'SYSTEM', '2018-05-02 00:00:00'),
 (57, '57', '$2y$10$yeWUKHUgj359o4yB6Jt5Bu6g3TYfMNgBSMBj7fZqSsQLOzPZMeraG', 'E', 'Rakesh Singh', 'N', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'SYSTEM', '2018-05-02 00:00:00'),
 (66, '66', '$2y$10$RZPdLFHUMUj7qUapsQXqUu3ofDNzmrBeCRx/VFb/TLVFt84R50Fpm', 'E', 'Arghya Mondal', 'N', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'SYSTEM', '2018-05-02 00:00:00'),
-(70, '70', '$2y$10$2wrt/2pSkaV5FTzfm4dHJekihmf57TtWGNTLpHeExY1T/pGot64mK', 'AC', 'Sujit Paul', 'N', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'Tanmoy Mondal', '2018-05-02 15:09:47'),
+(70, '70', '$2y$10$Vftwln93wxMH.PxYqiHutODGVQdQeSAzZLsvciygAqn/cVIX0k7Gq', 'AC', 'Sujit Paul', 'N', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'Tanmoy Mondal', '2018-05-02 15:09:47'),
 (72, '72', '$2y$10$PaVaJ2J30MJwe0dqsrnNZ.r0kDi.aXdQ51YuPRAxmwWKaKVBPvTAO', 'E', 'Sourav Kumar Ghorai', 'N', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'Nilkantha  Das', '2018-08-30 18:58:37'),
 (73, '73', '$2y$10$AcGUVSSF9Ny56iUHqbdsW.Xz7NRnQlyODW8akC9Cx/f91p8AgNrAa', 'E', 'Sushil Prajapati', 'N', 'N', 'SYSTEM', '2018-05-02 00:00:00', 'SYSTEM', '2018-05-02 00:00:00'),
 (74, '74', '$2y$10$RZPdLFHUMUj7qUapsQXqUu3ofDNzmrBeCRx/VFb/TLVFt84R50Fpm', 'E', 'Upendar Singh', 'N', 'Y', 'SYSTEM', '2018-05-02 00:00:00', 'SYSTEM', '2018-05-02 00:00:00'),
@@ -3429,7 +3429,16 @@ INSERT INTO `tm_audit_trail` (`sl_no`, `login_dt`, `user_id`, `terminal_name`, `
 (2448, '2018-10-23 13:17:17pm', '30', '197979.cloudwaysapps.com', ''),
 (2449, '2018-10-23 14:09:22pm', '32', 'Tanmoy', '2018-10-23 14:09:28pm'),
 (2450, '2018-10-25 10:59:43am', '32', 'Tanmoy', '2018-10-25 11:01:45am'),
-(2451, '2018-10-25 11:18:52am', '32', 'Tanmoy', '');
+(2451, '2018-10-25 11:18:52am', '32', 'Tanmoy', ''),
+(2452, '2018-11-02 12:59:29pm', '32', 'SSSWeb-3', '2018-11-02 12:59:42pm'),
+(2453, '2018-11-14 14:15:51pm', '32', 'SSSWeb-3', '2018-11-14 14:18:19pm'),
+(2454, '2018-11-14 14:18:27pm', '32', 'SSSWeb-3', '2018-11-14 14:31:29pm'),
+(2455, '2018-11-14 18:06:46pm', '32', 'SSSWeb-3', '2018-11-14 18:43:42pm'),
+(2456, '2018-11-28 17:17:36pm', '32', 'SSSWeb-3', '2018-11-28 17:18:58pm'),
+(2457, '2019-01-02 15:07:28pm', '32', 'SSSWeb-3', '2019-01-02 16:04:11pm'),
+(2458, '2019-01-02 17:37:35pm', '70', 'SSSWeb-3', '2019-01-02 19:08:14pm'),
+(2459, '2019-01-24 12:37:31pm', '32', 'SSSWeb-3', '2019-01-24 12:37:46pm'),
+(2460, '2019-01-24 12:44:48pm', '32', 'SSSWeb-3', '2019-01-24 15:11:06pm');
 
 -- --------------------------------------------------------
 
@@ -4941,7 +4950,8 @@ INSERT INTO `tm_claim` (`claim_cd`, `emp_no`, `claim_dt`, `project_type`, `proje
 (2018867, 3, '2018-10-22', 'Others', 'Others For Marketing', 'Customer Entertainment', '2018-10-11', '2018-10-11', 'Dinner with Customer at Marco Polo', '14946.00', 1, 'Aritra  Basu Roy Chowdhury', '2018-10-22 15:55:48', 0, NULL, NULL, NULL, 'Debasish Adhikary', '2018-10-22 13:24:54pm', '', ''),
 (2018868, 74, '2018-10-22', 'Others', 'Others', 'Local Conveyance', '2018-10-22', '2018-10-22', 'BLUE DART 7 BOX MACHINE', '832.00', 0, '', '0000-00-00 00:00:00', 0, NULL, NULL, NULL, 'Upendar Singh', '2018-10-22 16:01:19pm', 'Upendar Singh', '2018-10-22 16:01:33pm'),
 (2018869, 55, '2018-10-22', 'Others', 'Others', 'Office Maintenance', '2018-10-15', '2018-10-15', 'kalyan (birthday)', '790.00', 0, '', '0000-00-00 00:00:00', 0, NULL, NULL, NULL, 'Nabin Halder', '2018-10-22 17:08:43pm', '', ''),
-(2018870, 55, '2018-10-22', 'Others', 'Others', 'Lunch Subsidy', '2018-10-15', '2018-10-15', 'sukanta roy lunch for (biswakarmapuja)', '355.00', 0, '', '0000-00-00 00:00:00', 0, NULL, NULL, NULL, 'Nabin Halder', '2018-10-22 17:11:24pm', '', '');
+(2018870, 55, '2018-10-22', 'Others', 'Others', 'Lunch Subsidy', '2018-10-15', '2018-10-15', 'sukanta roy lunch for (biswakarmapuja)', '355.00', 0, '', '0000-00-00 00:00:00', 0, NULL, NULL, NULL, 'Nabin Halder', '2018-10-22 17:11:24pm', '', ''),
+(20191, 32, '2019-01-02', 'CCS', 'ALO MAHILA CO', 'Tours & Travels - Execution', '2018-12-30', '2019-01-02', 'dwdwdd', '900.00', 0, '', '0000-00-00 00:00:00', 0, NULL, NULL, NULL, 'Tanmoy Mondal', '2019-01-02 15:38:10pm', '', '');
 
 --
 -- Triggers `tm_claim`
@@ -7711,7 +7721,10 @@ INSERT INTO `tm_claim_trans` (`claim_cd`, `emp_no`, `claim_dt`, `sl_no`, `claim_
 (2018868, 74, '2018-10-22', 2, 'AUTO', '9+9', '18.00'),
 (2018868, 74, '2018-10-22', 3, 'BUS', '7+7', '14.00'),
 (2018869, 55, '2018-10-22', 1, 'OTHERS', '790', '790.00'),
-(2018870, 55, '2018-10-22', 1, 'OTHERS', '355', '355.00');
+(2018870, 55, '2018-10-22', 1, 'OTHERS', '355', '355.00'),
+(20191, 32, '2019-01-02', 3, 'TAXI', '', '400.00'),
+(20191, 32, '2019-01-02', 2, 'BUS', '', '200.00'),
+(20191, 32, '2019-01-02', 1, 'TRAIN', '', '300.00');
 
 -- --------------------------------------------------------
 
@@ -8187,7 +8200,9 @@ INSERT INTO `tm_payment` (`trans_dt`, `trans_cd`, `emp_no`, `payment_mode`, `pay
 ('2018-10-22', 2018409, 3, 'CHEQUE', 'NORMAL', '2018-10-22', 26736, 'AXIS', 22000, 'Sujit Paul', '2018-10-22 13:32:15', '', '0000-00-00', 1, 'Sujit Paul', '2018-10-22'),
 ('2018-10-22', 2018410, 41, 'CASH', 'ADVANCE', NULL, NULL, 'AXIS', 200, 'Sujit Paul', '2018-10-22 15:07:14', '', '0000-00-00', 1, 'Sujit Paul', '2018-10-22'),
 ('2018-10-23', 2018411, 74, 'CASH', 'ADVANCE', NULL, NULL, 'AXIS', 1000, 'Sujit Paul', '2018-10-23 11:12:12', '', '0000-00-00', 1, 'Sujit Paul', '2018-10-23'),
-('2018-10-23', 2018412, 74, 'CASH', 'ADVANCE', NULL, NULL, 'AXIS', 1000, 'Sujit Paul', '2018-10-23 11:15:14', '', '0000-00-00', 1, 'Sujit Paul', '2018-10-23');
+('2018-10-23', 2018412, 74, 'CASH', 'ADVANCE', NULL, NULL, 'AXIS', 1000, 'Sujit Paul', '2018-10-23 11:15:14', '', '0000-00-00', 1, 'Sujit Paul', '2018-10-23'),
+('2019-01-02', 20191, 32, 'CASH', 'NORMAL', NULL, NULL, 'AXIS', 1000, 'Sujit Paul', '2019-01-02 17:37:54', '', '0000-00-00', 0, '', '0000-00-00'),
+('2019-01-02', 20192, 36, 'CASH', 'NORMAL', NULL, NULL, 'AXIS', 20, 'Sujit Paul', '2019-01-02 17:41:37', '', '0000-00-00', 0, '', '0000-00-00');
 
 --
 -- Triggers `tm_payment`
@@ -8604,7 +8619,7 @@ ALTER TABLE `mm_project_type`
 -- AUTO_INCREMENT for table `tm_audit_trail`
 --
 ALTER TABLE `tm_audit_trail`
-  MODIFY `sl_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2452;
+  MODIFY `sl_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2461;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
