@@ -151,7 +151,7 @@
           </ul>
 	</li>
 
-	<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Claim">
+	<!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Claim">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseLeavePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-area-chart"></i>
             <span class="nav-link-text">Leave & Attendance</span>
@@ -169,10 +169,10 @@
                 }
               ?>
           </ul>
-        </li>
+        </li>-->
 
             <?php
-		if ($this->session->userdata('loggedin')->user_type == 'A') {?>
+		if ($this->session->userdata('loggedin')->user_type == 'A'||$this->session->userdata('loggedin')->user_type == 'AC') {?>
  
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Master Components">
                   <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
@@ -233,24 +233,10 @@
 
              <?php 
            }
-            if ($this->session->userdata('loggedin')->user_type == 'AC') {?>
 
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Master Components">
-                  <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-                    <i class="fa fa-fw fa-wrench"></i>
-                    <span class="nav-link-text">User Master</span>
-                  </a>
-                  <ul class="sidenav-second-level collapse" id="collapseComponents">
-                    <li>
-                      <a href="<?php echo site_url('Admin/addPurpose');?>">Purpose</a>
-                    </li>
-                    <li>
-                      <a href="<?php echo site_url('Admin/addClaimHead');?>">Add Claim Head</a>
-                    </li>
-                  </ul>
-                </li>
-        <?php  
-        }              
+ /******************************************************************************************************          
+  *               Payment to Employees -> Accountant(AC)                                               *
+  ******************************************************************************************************/
         if ($this->session->userdata('loggedin')->user_type == 'AC') {
               ?>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Payment Pages">
@@ -270,6 +256,9 @@
         <?php
       }
       ?>
+
+
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reports">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#reports" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>

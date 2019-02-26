@@ -8,7 +8,7 @@
 	   }
 
 	   public function employee(){									 /*Employee Dashboard*/
-		   if($this->session->userdata('is_login')->user_type == 'A'){
+		   if($this->session->userdata('is_login')->user_type == 'A'||$this->session->userdata('is_login')->user_type == 'AC'){
                    	$title['title']         = 'Claim-Manage Employee Details';
                    	$data['data_dtls']      = $this->PayrollModel->select_all('mm_employee');
                    	$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
