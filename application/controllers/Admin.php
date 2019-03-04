@@ -1492,4 +1492,40 @@ class Admin extends CI_Controller {
            $this->load->view('SU/adminLedgerModal', $result);
         }
     }
+
+    //For Attendance Details.........................................................
+
+	public function attnDetails() {
+		if($this->session->userdata('is_login')->user_type == 'A' || $this->session->userdata('is_login')->user_type == 'AC'){
+
+		$title['title'] = 'Claim-Attendance Details';
+		$t_name = 'mm_employee';
+		$date1_temp = DateTime::createFromFormat('d/m/Y',$_POST['date1']);
+		$from_date = $date1_temp->format('Y-m-d');
+
+		$date2_temp = DateTime::createFromFormat('d/m/Y',$_POST['date2']);
+		$to_date = $date2_temp->format('Y-m-d');
+		$emp_no = $this->input->post('emp_no');
+
+		$data['alldata'] = $this->AdminProcess->attnDetails($from_date,$to_date,$emp_no);
+		$data['emp_dtls'] = $this->AdminProcess->getDetailsbyEmpNo($t_name,$emp_no);
+		$data['date'] = $this->AdminProcess->get_dt();
+		$title['total_claim'] = $this->AdminProcess->countClaim('mm_manager');
+    	$title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
+    	$title['total_reject'] = $this->Process->countRejClaim('tm_claim');
+
+		$this->load->view('templetes/welcome_header',$title);
+		$this->load->view('SU/attnDetails',$data);
+		$this->load->view('templetes/welcome_footer');
+		}
+		else{
+			redirect('Admin/login');
+		}
+	}
+
+    	
+    public function attn_dtl_ajax(){
+    	$result['dtls'] = $this->AdminProcess->getAll('mm_employee');
+		$this->load->view('SU/attnDtlModal',$result);
+    }
 }

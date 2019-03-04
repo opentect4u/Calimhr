@@ -209,6 +209,21 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="attnDtl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Attendance Details</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body" id="attn-dtl">
+           
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -316,6 +331,14 @@
           .done(function( data ) {
             $('#payment-dtl').html(data);
             $('#paymentDtl').modal('show');
+          });
+      });
+
+    $('.attn_dtls').click(function(){
+        $.get( "<?php echo base_url().'index.php/admin/attn_dtl_ajax'?>")
+          .done(function( data ) {
+            $('#attn-dtl').html(data);
+            $('#attnDtl').modal('show');
           });
       });
       

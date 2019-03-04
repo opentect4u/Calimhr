@@ -930,4 +930,18 @@ public function getDetailsbyEmpNo($t_name,$emp_no){
         return $query->row();
     	
 	}
+
+	public function attnDetails($from_date,$to_date,$emp_no){
+		$this->db->where('emp_cd' , $emp_no);
+		$this->db->where('attn_dt >= ' , $from_date);
+		$this->db->where('attn_dt <= ' , $to_date);		
+		$query = $this->db->get('td_in_out');
+		$this->set_dt($from_date,$to_date);
+		if($query->num_rows() > 0) {
+	       foreach ($query->result() as $row) {
+    	        $data[] = $row;
+        	}
+        	return $data;
+    	}
+	}
 }

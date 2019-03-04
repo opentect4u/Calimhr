@@ -117,6 +117,28 @@ body{
 	font-size: 40px;	
 }
 
+.index_btn5 {
+	float: right;
+	position: fixed;
+	margin-top: 30px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	margin-left: 25px;
+	padding-bottom:50px;
+	padding-top: 50px;
+	padding-left:60px;
+	padding-right:60px;
+	
+	right:150px;
+	display: block;
+	background-color:#524e50;
+	max-width: 100%;
+	max-height: 100%;
+	text-decoration: none;
+	color: white;
+	font-size: 40px;	
+}
+
 
 
 
@@ -135,6 +157,16 @@ body{
 }
 
 .index_btn3:hover{
+	-webkit-box-shadow: 5px 5px 30px 20px #CCCCCC;
+	box-shadow: 5px 5px 30px 20px #CCCCCC;
+}
+
+.index_btn4:hover{
+	-webkit-box-shadow: 5px 5px 30px 20px #CCCCCC;
+	box-shadow: 5px 5px 30px 20px #CCCCCC;
+}
+
+.index_btn5:hover{
 	-webkit-box-shadow: 5px 5px 30px 20px #CCCCCC;
 	box-shadow: 5px 5px 30px 20px #CCCCCC;
 }
@@ -159,6 +191,18 @@ body{
 }
 
 .index_btn3:active {
+  background-color: #020828;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.index_btn4:active {
+  background-color: #020828;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.index_btn5:active {
   background-color: #020828;
   box-shadow: 0 5px #666;
   transform: translateY(4px);

@@ -151,25 +151,35 @@
           </ul>
 	</li>
 
-	<!--<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Claim">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseLeavePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Leave & Attendance</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseLeavePages">
-              <li>
-                <a class="nav-link" href="<?php echo site_url('leave/leaveStatus')?>">Apply</a>
-              </li>
-              <?php
-                if (($this->session->userdata('loggedin')->user_type != 'E') ) {?>
-                <li>
-                  <a class="nav-link" href=#>Approve</a>
-                </li>
-              <?php
-                }
-              ?>
-          </ul>
-        </li>-->
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Claim">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseLeavePages" data-parent="#exampleAccordion">
+      <i class="fa fa-fw fa-area-chart"></i>
+      <span class="nav-link-text">Leave & Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="collapseLeavePages">
+        <!--<li>
+          <a class="nav-link" href="<?php echo site_url('leave/leaveStatus')?>">Apply</a>
+        </li>
+        <?php
+          if (($this->session->userdata('loggedin')->user_type != 'E') ) {?>
+          <li>
+            <a class="nav-link" href=#>Approve</a>
+          </li>
+        <?php
+          }
+        ?>-->
+        <?php 
+          if(($this->session->userdata('loggedin')->user_id=='36')) {?>
+            <li>
+              <a class="nav-link" href="<?php echo site_url('attendance/attn')?>">Attendance Status</a>
+            </li>
+          <?php } ?>
+
+          <li>
+              <a class="nav-link" href="<?php echo site_url('attendance/viewAttn')?>">View Attendance Status</a>
+          </li>
+    </ul>
+  </li>
 
             <?php
 		if ($this->session->userdata('loggedin')->user_type == 'A'||$this->session->userdata('loggedin')->user_type == 'AC') {?>
@@ -311,6 +321,9 @@
                     <li class="payment_dtls">
                       <a class="nav-link" data-toggle="modal" data-target="#paymentDtl">Employee wise Payment Detail</a>
                     </li>
+                    <li class="attn_dtls">
+                      <a class="nav-link" data-toggle="modal" data-target="#attnDtl">Attendance Status</a>
+                    </li>
                     <?php
                     }
                     if ($this->session->userdata('loggedin')->user_type == 'AC') {?>
@@ -329,6 +342,7 @@
                     <?php
                     }
                     ?>
+                    
                   </ul>
                 </li>
                 <?php } ?>
