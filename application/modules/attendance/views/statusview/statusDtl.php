@@ -39,10 +39,12 @@
 	    				  }elseif($dtls->status=='E'){
 	    				  		echo "Early Out";
 	    				  }elseif($dtls->status=='H'){
-	    				  	    echo "Half";		
+	    				  	    echo "Half";
+	    				  }elseif($dtls->status=='C'){
+                  				echo "Client Site";		
 	    				  }else{
 	    				  	    echo "Absent"; 	
-	    				  } 
+	    				  }
 	    			?>"
 	    	readonly >
 	 </li>

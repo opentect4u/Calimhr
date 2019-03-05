@@ -29,6 +29,7 @@
 	    	<option value="E">Early Out</option>
 	    	<option value="H">Half</option>
 	    	<option value="A">Absent</option>
+	    	<option value="C">Client Site</option>
 	    </select>
 	 </li>
 	 <br>

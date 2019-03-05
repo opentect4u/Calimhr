@@ -44,6 +44,8 @@
 			    				$stType = 'Early Out';
 			    			}elseif($stType == 'H'){
                   $stType = 'Half';
+                }elseif($stType == 'C'){
+                  $stType = 'Client Site';
                 }else{
 			    				$stType = 'Absent';
 			    			}
