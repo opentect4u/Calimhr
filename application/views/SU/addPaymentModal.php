@@ -1,5 +1,5 @@
 
-<form method="post" id="form_login" action="<?php echo site_url("Admin/addPaymentProcess")?>">
+<form method="post" id="form_login" action="<?php echo site_url("Admin/addPaymentProcess")?>" onsubmit="return chkemp()">
     <div class="form-row">     
       <div class="form-group col-md-6">
         <label>Trans Date:</label>
@@ -9,7 +9,7 @@
         <label for="emp_name">Employee's Name</label>
         <div class="col-xs-4">
           <select class="custom-select" id="emp_no" name="emp_no" required style="width: 230px;">
-          <option>Select</option>
+          <option value="0">Select</option>
           <?php
             if ($emp_dtls) {
                 foreach ($emp_dtls as $aldta) {
@@ -119,4 +119,14 @@
   $('#amount').change(function(){
     $('#shadow_bal').val($('#rcvd_amt').val() - $('#amount').val());
   });
+
+  function chkemp(){
+    var val = document.getElementById("emp_no").value;
+    if(val==0){
+      alert("Please choose an employee");
+      return false;
+    }
+  }
+
+
 </script>

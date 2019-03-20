@@ -163,7 +163,6 @@ class adminProcess extends CI_Model {
 	
 	public function getAll($t_name){
 		$this->db->select('*');
-		$this->db->where('status_flag',1);
 		$result = $this->db->get($t_name);
 		if( $result->num_rows() > 0) {
 	        foreach ($result->result() as $row) {
