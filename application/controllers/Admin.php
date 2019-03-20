@@ -1373,7 +1373,13 @@ class Admin extends CI_Controller {
 		$from_date = $date1_temp->format('Y-m-d');
 
 		$result['emp_dtls'] = $this->AdminProcess->getAll('mm_employee');
-		$result['empBalance'] = $this->AdminProcess->empBalance($from_date);
+
+		If($this->session->userdata('is_login')->user_type != 'AC'){
+			$result['empBalance'] = $this->AdminProcess->empBalance($from_date);
+		}else{
+			$result['empBalance'] = $this->AdminProcess->empBalanceAll($from_date);
+		}
+        
 		
 		$title['total_claim'] = $this->AdminProcess->countClaim('mm_manager');
     	$title['total_payment'] = $this->AdminProcess->countRow('tm_payment');

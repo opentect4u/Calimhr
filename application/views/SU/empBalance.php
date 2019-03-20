@@ -3,11 +3,11 @@
     $('#dataTable').dataTable( {
        "order": [0, "asc"]
     } );
-    $('#dataTable_filter').hide();
+    /*$('#dataTable_filter').hide();
     $('#dataTable_length').hide();
     $('#dataTable_info').hide();
     $('#dataTable_paginate').hide();
-    $('#hie').hide();
+    $('#hie').hide();*/
 } );
 
    

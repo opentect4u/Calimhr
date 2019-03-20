@@ -163,6 +163,7 @@ class adminProcess extends CI_Model {
 	
 	public function getAll($t_name){
 		$this->db->select('*');
+		$this->db->where('status_flag',1);
 		$result = $this->db->get($t_name);
 		if( $result->num_rows() > 0) {
 	        foreach ($result->result() as $row) {
@@ -773,6 +774,26 @@ public function getDetailsbyEmpNo($t_name,$emp_no){
     		$count[] = $result->row();
     	}
 		return $count;
+	}
+
+	public function empBalanceAll($from_date){
+		$sql = "select emp_no,max(balance_dt)balance_dt from tm_balance_amt where balance_dt<='$from_date' and emp_no in(select emp_no from mm_employee where status_flag = 1) group by emp_no";
+
+		$query = $this->db->query($sql);
+
+		foreach ($query->result() as $row) {
+            $data[] = $row;
+        }
+        for ($i=0; $i < sizeof($data); $i++) { 
+			$this->db->select('emp_no');
+			$this->db->select('balance_amt');
+			$this->db->where('emp_no', $data[$i]->emp_no);
+			$this->db->where('balance_dt', $data[$i]->balance_dt);
+			$result = $this->db->get('tm_balance_amt');
+    		$count[] = $result->row();
+    	}
+		return $count;
+         
 	}
 
     public function closing_balance(){
