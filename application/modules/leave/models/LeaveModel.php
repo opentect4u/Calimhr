@@ -18,21 +18,32 @@
 		}
 
 		public function leaveTrans($empNo,$date){
-
-			$data = $this->db->query("select * from tm_leave
-				  	  where  emp_cd   = $empNo
-					  and    to_dt   >= $date");
+			$data = $this->db->query("select * from td_leave_trans
+				  	  				  where  emp_code   = $empNo
+					  				  and    to_dt    	>= $date");
 
 			return $data->result();
 		}
 
 		public function applNo($emp_no,$year){
 			$data = $this->db->query("select IfNull(max(appl_no),0) + 1 appl_no
-					  	  from   tm_leave 
-						  where  year(appl_dt) = $year");
+					  	  			  from   td_leave_trans 
+						              where  year(appl_dt) = $year");
 
 
 			return $data->row();
+		}
+
+		public function delete_leave($appl_dt,$appl_no){
+			$this->db->where('appl_dt',$appl_dt);
+			$this->db->where('appl_no',$appl_no);
+			$this->db->delete('td_leave_trans');
+		}
+
+		public function delete_dates($appl_dt,$appl_no){
+			$this->db->where('appl_dt',$appl_dt);
+			$this->db->where('appl_no',$appl_no);
+			$this->db->delete('td_leave_dates');
 		}
 
 		public function empData($tableName,$emp_no){

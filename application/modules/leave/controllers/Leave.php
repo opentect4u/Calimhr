@@ -8,28 +8,25 @@
 		}
 
 		public function leaveStatus(){
-			$title['title']         = 'Claim-View Leave Status';
+			$title['title'] 		= 'Claim-View Leave Status';
 
-			$user_id 		= $this->session->userdata('loggedin')->user_id;
+			$user_id 				= $this->session->userdata('loggedin')->user_id;
 
-			$date			= date('Y-m-d');	
+			$date					= date('Y-m-d');	
 
 			$data['data_dtls']      = $this->LeaveModel->leaveTrans($user_id,$date);
 
-			//echo "<pre>";
-			//var_dump($data);
+           	$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
 
-                   	$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
+           	$title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
 
-                   	$title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
-
-                   	$title['total_reject']  = $this->Process->countRejClaim('tm_claim');
+           	$title['total_reject']  = $this->Process->countRejClaim('tm_claim');
 
 			$this->load->view('templetes/welcome_header',$title);
 
 			$this->load->view("application/applStatus",$data);
 
-                   	$this->load->view('templetes/welcome_footer');
+            $this->load->view('templetes/welcome_footer');
 		}
 
 		public function applyLeave(){
@@ -43,37 +40,57 @@
 
 				$aplNo  = $aplNo->appl_no;
 
-				//echo "<pre>";
-				//var_dump ($aplNo->appl_no);die;
-
-				$eName  = $this->LeaveModel->empData('mm_employee',$userId);
-
 				$date	= date('Y-m-d');
 
+				$days   = $this->input->post('days');
+
 				$data_array = array(
-					"appl_dt"	=> $date,
+					"appl_dt"		=> $date,
 
-					"appl_no"	=> $aplNo,
+					"appl_no"		=> $aplNo,
 
-					"emp_cd"	=> $userId,
+					"emp_code"		=> $userId,
 
-					"emp_name"	=> $eName->emp_name,
+					"from_dt"		=> $this->input->post('frmdt'),
 
-					"from_dt"	=> $this->input->post('frmdt'),
-
-					"to_dt"		=> $this->input->post('todt'),
+					"to_dt"			=> $this->input->post('todt'),
 
 					"leave_type"	=> $this->input->post('lvtype'),
 
-					"reason"	=> trim($this->input->post('rns')),
+					"remarks"		=> trim($this->input->post('rns')),
+
+					"days"			=> $this->input->post('days'),
 
 					"created_by"	=> $userId,
 
 					"created_dt"	=> date("Y-m-d h:i:s")
 				);
 
-				$this->LeaveModel->insertData('tm_leave',$data_array);
+				$this->LeaveModel->insertData('td_leave_trans',$data_array);
 
+				$levDt 	=	$this->input->post('frmdt');
+
+				$j      = 1;
+
+				for($i=0;$i<$days;$i++){
+
+					$data_array1 = array(
+						"appl_dt"		=> $date,
+
+						"appl_no"		=> $aplNo,
+
+						"emp_code"		=> $userId,
+
+						"leave_dt"		=> $levDt,
+
+						"status"		=> 'U');
+
+					$this->LeaveModel->insertData('td_leave_dates',$data_array1);
+
+					$levDt =  date('Y-m-d', strtotime($levDt. ' + '.$j.' days')); 
+
+				}
+    			
 				$this->session->set_flashdata('msg','Save Successful');	
 
 				redirect('leave/leaveStatus');
@@ -82,17 +99,30 @@
 
 				$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
 
-                        	$title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
+                $title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
 
 				$title['total_reject']  = $this->Process->countRejClaim('tm_claim');
 
 				$this->load->view('templetes/welcome_header',$title);
 
-                        	$this->load->view("application/apply");
+                $this->load->view("application/apply");
 
-                        	$this->load->view('templetes/welcome_footer');
+                $this->load->view('templetes/welcome_footer');
 			}
 		}
+
+		public function delLeave(){
+				
+				$applDt			= $this->input->get('appl_dt');
+
+				$applNo			= $this->input->get('appl_no');	
+
+				$this->LeaveModel->delete_leave($applDt,$applNo);
+
+				$this->LeaveModel->delete_dates($applDt,$applNo);
+
+				redirect('leave/leaveStatus');			
+		}  
 
 		public function editLeave(){
 				$title['title']         = 'Claim-Leave Application';

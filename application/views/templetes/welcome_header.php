@@ -157,17 +157,17 @@
       <span class="nav-link-text">Leave & Attendance</span>
     </a>
     <ul class="sidenav-second-level collapse" id="collapseLeavePages">
-        <!--<li>
-          <a class="nav-link" href="<?php echo site_url('leave/leaveStatus')?>">Apply</a>
+        <li>
+          <a class="nav-link" href="<?php echo site_url('leave/leaveStatus')?>">Apply Leave</a>
         </li>
         <?php
           if (($this->session->userdata('loggedin')->user_type != 'E') ) {?>
           <li>
-            <a class="nav-link" href=#>Approve</a>
+            <a class="nav-link" href=#>Approve Leave</a>
           </li>
         <?php
           }
-        ?>-->
+        ?>
         <?php 
           if(($this->session->userdata('loggedin')->user_id=='36')) {?>
             <li>
