@@ -26,12 +26,6 @@
 			Type of Leave
 		</label>
 
-		<!--<label for  ="lvno" style = "display:inline;margin-left:18px" 
-                       class="field-split align-left labelstyle">
-                        Balance Leave
-        </label>-->
-
-
 		<select name = "lvtype" style="width:325px;display:inline" 
                         class="field-style field-split align-left" required>
 
@@ -54,17 +48,18 @@
 			Start Date
 		</label>
 
-		<label for="days" style = "display:inline;margin-left:19px"
+		<!--<label for="days" style = "display:inline;margin-left:19px;display:none"
 						  class="field-split align-left labelstyle">
                  No.of Days
-        </label>
+        </label>-->
 
-        <input type = "date" name="frmdt" id="dp1" style="width:325px" 
-		       class="field-style field-split align-left" required
+        <input type = "date" name="frmdt" id="dp1" style="width:325px;" 
+		       class="field-style field-split align-left" required onchange="showDay()"
 		/>
 
-        <input type="number" name="days" id="days" style="width:300px;display:inline;margin-left:10px" 
-		       class = "field-style field-split align-left" onchange="endDt()"
+        <input type="number" name="days" id="days" style="width:300px;display:inline;margin-left:10px;display:none" 
+		       class = "field-style field-split align-left" 
+		       placeholder = "No. of Days of Leave" onchange="endDt()"
 		       required
 		/>
 	</li>
@@ -82,7 +77,7 @@
         </label>
  
 		<input type = "date" name="todt" id="dp2" style = "width:325px;" 
-                       class="field-style field-split" readonly
+                       class="field-style field-split" readonly required
         />	
 	</li>
 
@@ -137,10 +132,10 @@
 			document.getElementById("dp2").value = format;
 		}
 
-		function chkDt(){
+		/*function chkDt(){
 			var endDt	=	document.getElementById("dp2").value;
 
-			if(endDt="0000-00-00"){
+			if(endDt=""){
 				document.getElementById("lbl").style.visibility="visible";
             	document.getElementById("lbl").innerHTML="Invalid end date";
             	document.getElementById("lbl").style.color="blue";
@@ -153,6 +148,10 @@
             	document.getElementById("cust_per_ph").style.border="";
             	return true;
 			}
+		}*/
+
+		function showDay(){
+			document.getElementById("days").style.display = 'block';
 		}
 </script>
 

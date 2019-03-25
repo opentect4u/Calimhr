@@ -67,29 +67,6 @@
 				);
 
 				$this->LeaveModel->insertData('td_leave_trans',$data_array);
-
-				$levDt 	=	$this->input->post('frmdt');
-
-				$j      = 1;
-
-				for($i=0;$i<$days;$i++){
-
-					$data_array1 = array(
-						"appl_dt"		=> $date,
-
-						"appl_no"		=> $aplNo,
-
-						"emp_code"		=> $userId,
-
-						"leave_dt"		=> $levDt,
-
-						"status"		=> 'U');
-
-					$this->LeaveModel->insertData('td_leave_dates',$data_array1);
-
-					$levDt =  date('Y-m-d', strtotime($levDt. ' + '.$j.' days')); 
-
-				}
     			
 				$this->session->set_flashdata('msg','Save Successful');	
 
@@ -119,12 +96,10 @@
 
 				$this->LeaveModel->delete_leave($applDt,$applNo);
 
-				$this->LeaveModel->delete_dates($applDt,$applNo);
-
 				redirect('leave/leaveStatus');			
 		}  
 
-		public function editLeave(){
+		/*public function editLeave(){
 				$title['title']         = 'Claim-Leave Application';
 
                                 $title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
@@ -147,11 +122,78 @@
 
 
 			
-		}  
+		} */
 
-		
-		
+		public function showLeave(){
+			if(($this->session->userdata('is_login')->user_type == 'A') || ($this->session->userdata('is_login')->user_type == 'M') || ($this->session->userdata('is_login')->user_type == 'AC')){
+				$title['title']         = 'Claim-Approve Leave';
+
+				$user_id 				= $this->session->userdata('loggedin')->user_id;
+
+				$date					= date('Y-m-d');	
+
+				$data['data_dtls']      = $this->LeaveModel->aprv_list($user_id);   
+
+				$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
+
+                $title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
+
+				$title['total_reject']  = $this->Process->countRejClaim('tm_claim');
+
+				$this->load->view('templetes/welcome_header',$title);
+
+                $this->load->view("application/aprvStatus",$data);
+
+                $this->load->view('templetes/welcome_footer');
+			}
+		}
+
+		public function AprvLeave(){
+			if ($_SERVER['REQUEST_METHOD'] == "POST"){
+
+				$userId	= $this->session->userdata('loggedin')->user_id;
+
+				$data_array = array(
+					"approval_status"	=> $this->input->post('aprvStatus'),
+
+					"approved_by"		=> $userId,
+
+					"approval_dt"		=> date("Y-m-d h:i:s")
+				);
+
+				$where_array = array(
+					"appl_no"  => $this->input->post('applno'),
+
+				    "appl_dt"  => $this->input->post('appldt')
+				);
 
 
+				$this->LeaveModel->editData('td_leave_trans',$data_array,$where_array);
+
+				$this->session->set_flashdata('msg','Save Successful');	
+
+				redirect('leave/showLeave');
+			}else{
+				$title['title']         = 'Claim-Leave Application';
+
+				$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
+
+                $title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
+
+				$title['total_reject']  = $this->Process->countRejClaim('tm_claim');
+
+				$apl_dt = $this->input->get('appl_dt');
+
+				$apl_no = $this->input->get('appl_no');
+
+				$data['leave_dtls']		= $this->LeaveModel->select_leave($apl_dt,$apl_no);
+
+				$this->load->view('templetes/welcome_header',$title);
+
+                $this->load->view("application/aprvLeave",$data);
+
+                $this->load->view('templetes/welcome_footer');
+			}
+		}
 	}
 ?>		

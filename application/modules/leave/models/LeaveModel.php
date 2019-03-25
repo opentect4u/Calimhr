@@ -40,11 +40,6 @@
 			$this->db->delete('td_leave_trans');
 		}
 
-		public function delete_dates($appl_dt,$appl_no){
-			$this->db->where('appl_dt',$appl_dt);
-			$this->db->where('appl_no',$appl_no);
-			$this->db->delete('td_leave_dates');
-		}
 
 		public function empData($tableName,$emp_no){
 			$this->db->where('emp_no',$emp_no);
@@ -67,6 +62,28 @@
 
 			return $data->row();
 		}
-	}
+
+		public function aprv_list($mng_no){
+				$data = $this->db->query("Select a.appl_dt appl_dt,a.appl_no appl_no,
+										         a.emp_code emp_code,a.leave_type,b.emp_name emp_name
+										  From   td_leave_trans a,
+										  		 mm_employee b
+									      WHERE  a.emp_code = b.emp_no
+									      and    a.emp_code In (select manage_no from mm_manager where emp_no = $mng_no) 
+									      And    a.approval_status = 'U'");
+				return $data->result();
+		}
+
+		public function select_leave($apl_dt,$apl_no){
+			$data= $this->db->query("SELECT a.appl_dt appl_dt,a.appl_no appl_no,a.emp_code emp_code,
+							         a.leave_type leave_type,a.from_dt from_dt,
+									 a.to_dt to_dt,a.days days,a.remarks remarks,b.emp_name
+							  FROM   td_leave_trans a,mm_employee b 
+							  WHERE a.emp_code = b.emp_no
+							  And   a.appl_dt  = '$apl_dt'
+							  And   a.appl_no  =  $apl_no");
+			return $data->row();
+		}
+}
 
 ?>

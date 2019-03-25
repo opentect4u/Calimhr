@@ -163,7 +163,7 @@
         <?php
           if (($this->session->userdata('loggedin')->user_type != 'E') ) {?>
           <li>
-            <a class="nav-link" href=#>Approve Leave</a>
+            <a class="nav-link" href="<?php echo site_url('leave/showLeave'); ?>">Approve Leave</a>
           </li>
         <?php
           }
