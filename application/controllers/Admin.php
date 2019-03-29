@@ -1529,9 +1529,10 @@ class Admin extends CI_Controller {
 		}
 	}
 
-    	
     public function attn_dtl_ajax(){
     	$result['dtls'] = $this->AdminProcess->getAll('mm_employee');
 		$this->load->view('SU/attnDtlModal',$result);
     }
+
+
 }

@@ -20,7 +20,8 @@
 		public function leaveTrans($empNo,$date){
 			$data = $this->db->query("select * from td_leave_trans
 				  	  				  where  emp_code   = $empNo
-					  				  and    to_dt    	>= $date");
+					  				  and    to_dt    	>= '$date'");
+
 
 			return $data->result();
 		}
@@ -77,13 +78,53 @@
 		public function select_leave($apl_dt,$apl_no){
 			$data= $this->db->query("SELECT a.appl_dt appl_dt,a.appl_no appl_no,a.emp_code emp_code,
 							         a.leave_type leave_type,a.from_dt from_dt,
-									 a.to_dt to_dt,a.days days,a.remarks remarks,b.emp_name
+									 a.to_dt to_dt,a.days days,a.remarks remarks,b.emp_name emp_name
 							  FROM   td_leave_trans a,mm_employee b 
 							  WHERE a.emp_code = b.emp_no
 							  And   a.appl_dt  = '$apl_dt'
 							  And   a.appl_no  =  $apl_no");
 			return $data->row();
 		}
+
+		public function set_dt($date1,$date2){
+		$value = array(
+			'from_date' => $date1,
+			'to_date' =>$date2
+		);
+		$this->db->select('*');
+		$this->db->where('id',$this->session->userdata('is_login')->emp_no);
+		$query = $this->db->get('tt');
+		if($query->num_rows() > 0){
+			$this->db->where('id',$this->session->userdata('is_login')->emp_no);
+			$this->db->update('tt',$value);
+		}
+		else{
+			$value = array(
+				'id' =>  $this->session->userdata('is_login')->emp_no,
+				'from_date' => $date1,
+				'to_date' => $date2
+			);
+			$this->db->insert('tt',$value);
+		}
+
+		
+		return 1;
+	}
+
+		public function leaveDetails($from_date,$to_date,$emp_no){
+			$this->db->where('emp_code' 	, $emp_no);
+			$this->db->where('from_dt >= '  , $from_date);
+			$this->db->where('from_dt <= '  , $to_date);		
+			$query = $this->db->get('td_leave_trans');
+			$this->set_dt($from_date,$to_date);
+
+			if($query->num_rows() > 0) {
+	       		foreach ($query->result() as $row) {
+    	        $data[] = $row;
+        	}
+        	return $data;
+    	}
+	}
 }
 
 ?>

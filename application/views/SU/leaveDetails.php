@@ -32,7 +32,7 @@
     		<h3 style="text-align: center;">SYNERGIC SOFTEK SOLUTIONS PVT. LTD.</h3>
     		<h4 style="text-align: center;">55 D, DESAPRAN SASHMAL ROAD</h4>
     		<h5 style="text-align: center;">KOLKATA-33</h5>
-    		<h5 style="text-align: center;">Attendance status for the period of <?php echo date('d/m/Y', strtotime($date->from_date)).' to '.date('d/m/Y', strtotime($date->to_date));?></h5>
+    		<h5 style="text-align: center;">Leave status for the period of <?php echo date('d/m/Y', strtotime($date->from_date)).' to '.date('d/m/Y', strtotime($date->to_date));?></h5>
     		<hr>
     		<?php
         if ($alldata && $emp_dtls && $date) {
@@ -48,29 +48,36 @@
 	              		<thead>
 	                		<tr>
 			                	<th>Date</th>
+                        <th>Period</th>
+                        <th>Type</th>
 			                  <th>Status</th>
-			                  <th>Time</th>
-			                  <th>Remarks</th>
 	                		</tr>
 	              		</thead>
 	              		<tbody>
 	              			<?php if($alldata){
 			                	foreach ($alldata as $aldta):?>
 			                <tr>
-			                  	<td class="center"><?php echo date('d/m/Y',strtotime($aldta->attn_dt));?></td>
-			                  	<td class="center"><?php if($aldta->status=='L'){
-                                                      echo "Late In";
-                                                    }elseif($aldta->status=='O'){
-                                                      echo "Early Out";  
+			                  	<td class="center"><?php echo date('d/m/Y',strtotime($aldta->appl_dt));?></td>
+                          <td class="center"><?php echo date('d/m/Y',strtotime($aldta->from_dt)).' to '.date('d/m/Y',strtotime($aldta->to_dt));?></td>
+			                  	<td class="center"><?php if($aldta->leave_type=='C'){
+                                                      echo "CL";
+                                                    }elseif($aldta->status=='M'){
+                                                      echo "ML";  
                                                     }elseif($aldta->status=='H'){
-                                                      echo "Half";  
+                                                      echo "HL";  
                                                     }else{
-                                                      echo Absent;
+                                                      echo "EL";
                                                     }
                                              ?>
                           </td>
-			                  	<td class="center"><?php echo $aldta->in_out_time;?></td>   
-			                  	<td class="center"><?php echo $aldta->remarks;?></td>
+			                  	<td class="center"><?php if($aldta->approval_status=='A'){
+                                                      echo "Approved";
+                                                   }elseif($aldta->status=='R'){
+                                                      echo "Rejected"; 
+                                                   }else{
+                                                      echo "Pending For Approval";
+                                                  }
+                                              ?></td>   
 			                </tr>
 			                <?php	 
                         endforeach;

@@ -8,6 +8,27 @@
 		  class="form-style-9" method="POST" action="<?php echo site_url('leave/AprvLeave');?>"
 	      />
       <ul>
+
+      	<li>
+      		<label for="empcd" class="field-split align-left labelstyle">
+		       Employee Code
+		    </label>
+
+		    <label for="empname" class="field-split align-left labelstyle" style="display:inline;margin-left:19px">
+		       Name
+		    </label>
+      	
+			<input type="text" name="empcd" style="width:325px;" 
+			       class = "field-style field-split align-left" 
+			       value ="<?php echo $leave_dtls->emp_code; ?>" readonly
+			/>
+
+			<input type="text" name="empname" style="width:300px;display:inline;margin-left:10px;" 
+			       class = "field-style field-split align-left" value="<?php echo $leave_dtls->emp_name; ?>"
+			       readonly
+			/>
+	    </li>
+
       	<li>
       		<label for="appldt" class="field-split align-left labelstyle">
 		       Application Date

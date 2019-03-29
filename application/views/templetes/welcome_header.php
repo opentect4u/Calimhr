@@ -48,7 +48,7 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <?php if($this->session->userdata('loggedin')->user_type == 'AU'){?>
+    <!--<?php if($this->session->userdata('loggedin')->user_type == 'AU'){?>
      <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion"> 
       <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reports">
@@ -66,9 +66,9 @@
             <li class="claim_adminDtl">
               <a class="nav-link" data-toggle="modal" data-target="#claimAdminDtl">Employee Wise<br>Claim Details</a>
             </li>
-            <!--<li class="cl_balance">
+            <li class="cl_balance">
               <a class="nav-link" data-toggle="modal" data-target="#alclbalns">All Closing Balances</a>
-            </li>-->
+            </li>
             
             <li class="emp_cl_balance">
               <a class="nav-link" data-toggle="modal" data-target="#empClBalns">Employee Balances</a>
@@ -101,7 +101,7 @@
         <?php
         }
         else{
-        ?>
+        ?>-->
         
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
@@ -178,6 +178,17 @@
           <li>
               <a class="nav-link" href="<?php echo site_url('attendance/viewAttn')?>">View Attendance Status</a>
           </li>
+
+
+          <?php 
+          if(($this->session->userdata('loggedin')->user_id=='36')) {?>
+          <li class="attn_dtls">
+              <a class="nav-link" data-toggle="modal" data-target="#attnDtl">Attendance Report</a>
+          </li>
+          <li class="leave_dtls">
+            <a class="nav-link" data-toggle="modal" data-target="#leaveDtl">Leave Report</a>
+          </li>
+          <?php } ?>
     </ul>
   </li>
 
@@ -324,20 +335,29 @@
                     <li class="attn_dtls">
                       <a class="nav-link" data-toggle="modal" data-target="#attnDtl">Attendance Status</a>
                     </li>
+                    <li class="leave_dtls">
+                      <a class="nav-link" data-toggle="modal" data-target="#leaveDtl">Leave Status</a>
+                    </li>
                     <?php
                     }
                     if ($this->session->userdata('loggedin')->user_type == 'AC') {?>
                     <li class="emp_wise_pledger">
                       <a class="nav-link" data-toggle="modal" data-target="#empWisePledger">Employee wise<br>Personal Ledger</a>
                     </li>
-                    <li class="emp_cl_balance">
+                    <!--<li class="emp_cl_balance">
                       <a class="nav-link" data-toggle="modal" data-target="#empClBalns">Employee Balances</a>
-                    </li>
+                    </li>-->
                     <li class="all_payment_dtls">
                       <a class="nav-link" data-toggle="modal" data-target="#allpaymentDtl">Payment Details</a>
                     </li>
                     <li class="payment_dtls">
                       <a class="nav-link" data-toggle="modal" data-target="#paymentDtl">Employee wise Payment Detail</a>
+                    </li>
+                    <li class="attn_dtls">
+                      <a class="nav-link" data-toggle="modal" data-target="#attnDtl">Attendance Status</a>
+                    </li>
+                    <li class="leave_dtls">
+                      <a class="nav-link" data-toggle="modal" data-target="#leaveDtl">Leave Status</a>
                     </li>
                     <?php
                     }

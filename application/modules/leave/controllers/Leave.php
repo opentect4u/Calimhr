@@ -167,9 +167,24 @@
 				    "appl_dt"  => $this->input->post('appldt')
 				);
 
+				$no = $this->input->post('days');
+				$no = -1 * $no;
+				
+				$insert_data	= array(
+					"balance_dt"		=> $this->input->post('appldt'),
+					"trans_cd"			=> $this->input->post('applno'),
+					"emp_no"			=> $this->input->post('empcd'),
+					"trans_type"		=> 'A',
+					"leave_type"		=> $this->input->post('lvtype'),
+					"leave_no"		    => $no,
+					"to_dt"				=> $this->input->post('todt')
+				);
 
 				$this->LeaveModel->editData('td_leave_trans',$data_array,$where_array);
 
+				if($this->input->post('aprvStatus')=='A'){
+					$this->LeaveModel->insertData('td_leave_balance',$insert_data);
+				}	
 				$this->session->set_flashdata('msg','Save Successful');	
 
 				redirect('leave/showLeave');
@@ -195,5 +210,35 @@
                 $this->load->view('templetes/welcome_footer');
 			}
 		}
-	}
+
+	/************************************Report Section**************************/	
+
+	   //For Leave Details
+	    public function leaveDetails() {
+			$title['title'] = 'Claim-Leave Details';
+			$t_name = 'mm_employee';
+			$date1_temp = DateTime::createFromFormat('d/m/Y',$_POST['date1']);
+			$from_date = $date1_temp->format('Y-m-d');
+
+			$date2_temp = DateTime::createFromFormat('d/m/Y',$_POST['date2']);
+			$to_date = $date2_temp->format('Y-m-d');
+			$emp_no = $this->input->post('emp_no');
+
+			$data['alldata']  = $this->LeaveModel->leaveDetails($from_date,$to_date,$emp_no);
+			$data['emp_dtls'] = $this->AdminProcess->getDetailsbyEmpNo($t_name,$emp_no);
+			$data['date'] = $this->AdminProcess->get_dt();
+			$title['total_claim'] = $this->AdminProcess->countClaim('mm_manager');
+	    	$title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
+	    	$title['total_reject'] = $this->Process->countRejClaim('tm_claim');
+
+			$this->load->view('templetes/welcome_header',$title);
+			$this->load->view('SU/leaveDetails',$data);
+			$this->load->view('templetes/welcome_footer');
+		}
+	    public function leave_dtl_ajax(){
+	    	$result['dtls'] = $this->AdminProcess->getAll('mm_employee');
+			$this->load->view('SU/leaveDtlModal',$result);
+	    }
+
+}
 ?>		

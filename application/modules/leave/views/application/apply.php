@@ -102,6 +102,7 @@
 		function endDt(){
 			var frmDt = document.getElementById("dp1").value;
 			var days  = document.getElementById("days").value;
+			var day;
 
 			var year;
 
@@ -116,7 +117,7 @@
     		var y  = toDt.getFullYear();
 
     		if(dd < 9){
-    			dd = '0' + mm;
+    			dd = '0' + dd;
     		}else{
     			dd = dd;
     		}
