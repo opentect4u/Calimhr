@@ -43,6 +43,9 @@
 			public function print_ps($emp_no){						
 				$this->db->select('*');
 				$this->db->where('emp_no',$emp_no);
+				$this->db->order_by("trans_dt");
+				$this->db->order_by("sal_year");
+				$this->db->order_by("sal_month");
 				$data=$this->db->get('tm_paysheet');
 				return $data->result();
 			}
