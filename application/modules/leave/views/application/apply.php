@@ -131,6 +131,7 @@
 			var format = y + '-' + mm + '-' + dd;
 
 			document.getElementById("dp2").value = format;
+			
 		}
 
 		/*function chkDt(){

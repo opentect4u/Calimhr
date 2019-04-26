@@ -23,8 +23,18 @@
 			return $data->row();
 		}
 
+		public function max_sl($date){									/*Maximum SL No for a particular date*/
+			$sl = $this->db->query("select ifnull(max(sl_no),0) + 1 sl_no
+				              from td_in_out where attn_dt = '$date'");
+			return $sl->row();
+		}
+
 		public function insert_status($table,$data){		/*Inserts data in td_in_out*/
 			$this->db->insert($table,$data);
+		}
+
+		public function insert_dates($table,$data){		/*Inserts data in td_dates*/
+			$this->db->insert_batch($table,$data);
 		}
 
 		public function attn_view($empCd){					/*Employee wise selects data from td_in_out*/			

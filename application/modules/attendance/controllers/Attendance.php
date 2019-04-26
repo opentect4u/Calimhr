@@ -80,14 +80,22 @@
 				$userId			= $this->session->userdata('loggedin')->user_id;
 				$empCd  		= $this->input->post('emp_cd');
 
-				$attnDtTemp		= DateTime::createFromFormat('d/m/Y',$this->input->post('attn_dt'));
-				$attnDt         = $attnDtTemp->format('Y-m-d');
+				/*$attnDtTemp		= DateTime::createFromFormat('d/m/Y',$this->input->post('attn_dt'));
+				$attnDt         = $attnDtTemp->format('Y-m-d');*/
+
+				$attnDt = $this->input->post('attn_dt');
 
 				$eName  = $this->AttnModel->emp_name($empCd);
+
+				$maxSl  = $this->AttnModel->max_sl($attnDt)->sl_no;
+
+				$days   = $this->input->post('days');
 
 
 				$data_array = array(
 					"attn_dt"			=> $attnDt,
+
+					"sl_no"				=> $maxSl,
 
 					"emp_cd"			=> $empCd,
 
@@ -97,6 +105,8 @@
 
 					"in_out_time"		=> $this->input->post('in_out_time'),
 
+					"no_of_days"		=> $this->input->post('days'),
+
 					"remarks"			=> trim($this->input->post('remarks')),
 
 					"created_by"		=> $userId,
@@ -105,6 +115,42 @@
 				);
 
 				$this->AttnModel->insert_status('td_in_out',$data_array);
+
+
+				if($this->input->post('status')=='A'||$this->input->post('status')=='C'){
+
+					for($i=0; $i < $days; $i++){
+
+						$attnDt = strtotime("+".$i." day", strtotime($attnDt));
+
+						var_dump(date('Y-m-d',$attnDt));
+
+						$date_array[]	=	array(
+
+								"attn_dt"	    => date("Y-m-d",$attnDt),
+
+								"sl_no"			=> $maxSl,
+
+								"emp_cd"		=> $empCd,
+
+								"status"		=> $this->input->post('status')
+						);	
+					}die;
+
+				}else{
+					$date_array[]	=	array(
+							"attn_dt"		=>	$attnDt,
+
+							"sl_no"			=> $maxSl,
+
+							"emp_cd"		=> $empCd,
+
+							"status"		=> $this->input->post('status')
+					);
+				}
+
+				$this->AttnModel->insert_dates('td_dates',$date_array);
+
 
 				$this->session->set_flashdata('msg','Save Successful');	
 
