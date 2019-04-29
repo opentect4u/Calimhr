@@ -18,6 +18,8 @@
 		  		  <th>Emp.No.</th>
 		  		  <th>Name</th>	
 		  		  <th>Status</th>
+            <th>Time</th>
+            <th>Days</th>
 		  		  <th>Option</th>
                 </tr>
               </thead>
@@ -27,6 +29,8 @@
 		  		  <th>Emp.No.</th>
 		  		  <th>Name</th>
 		  		  <th>Status</th>
+            <th>Time</th>
+            <th>Days</th>
 		  		  <th>Option</th>
                 </tr>
               </tfoot>
@@ -52,10 +56,12 @@
 							echo $stType;		   
 		       			?>
 		  			</td>
-		     <td><button class="btn btn-primary btn-danger" data-toggle="tooltip" 
-                           data-placement="bottom" title="" data-original-title="Delete" 
-                           onclick="location.href='<?php echo site_url("attendance/delAttn?attn_dt=$values->attn_dt&emp_cd=$values->emp_cd&status=$values->status");?>';">
-               <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+            <td><?php echo $values->in_out_time; ?></td>
+            <td><?php echo $values->no_of_days; ?></td>
+		     <td><button class="btn btn-primary" data-toggle="tooltip" 
+                           data-placement="bottom" title="" data-original-title="View" 
+                           onclick="location.href='<?php echo site_url("attendance/viewAllstatus?trans_dt=$values->trans_dt&sl_no=$values->sl_no");?>';">
+               <i class="fa fa-eye" aria-hidden="true"></i>
           </td>
 		</tr>
 

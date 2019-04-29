@@ -12,7 +12,7 @@
 			$user_id 			 	= $this->session->userdata('loggedin')->user_id;
 			$date				 	= date('Y-m-d');
 
-			$data['dtls']   	 	= $this->AttnModel->AttnTrans($date);
+			$data['dtls']   	 	= $this->AttnModel->AttnTrans();
 
 			$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
 
@@ -83,16 +83,20 @@
 				/*$attnDtTemp		= DateTime::createFromFormat('d/m/Y',$this->input->post('attn_dt'));
 				$attnDt         = $attnDtTemp->format('Y-m-d');*/
 
+				$date   = date('Y-m-d');
+
 				$attnDt = $this->input->post('attn_dt');
 
 				$eName  = $this->AttnModel->emp_name($empCd);
 
-				$maxSl  = $this->AttnModel->max_sl($attnDt)->sl_no;
+				$maxSl  = $this->AttnModel->max_sl($date)->sl_no;
 
 				$days   = $this->input->post('days');
 
 
 				$data_array = array(
+					"trans_dt"    		=> $date,
+
 					"attn_dt"			=> $attnDt,
 
 					"sl_no"				=> $maxSl,
@@ -109,6 +113,8 @@
 
 					"remarks"			=> trim($this->input->post('remarks')),
 
+					"adj_flag"			=> 'U',
+
 					"created_by"		=> $userId,
 
 					"created_dt"		=> date("Y-m-d h:i:s")
@@ -121,13 +127,12 @@
 
 					for($i=0; $i < $days; $i++){
 
-						$attnDt = strtotime("+".$i." day", strtotime($attnDt));
-
-						var_dump(date('Y-m-d',$attnDt));
+						$attnDt1 = date('Y-m-d', strtotime($attnDt. ' + '.$i.' days'));
 
 						$date_array[]	=	array(
+							    "trans_dt"    	=> $date,
 
-								"attn_dt"	    => date("Y-m-d",$attnDt),
+								"attn_dt"	    => $attnDt1,
 
 								"sl_no"			=> $maxSl,
 
@@ -135,10 +140,12 @@
 
 								"status"		=> $this->input->post('status')
 						);	
-					}die;
+					}
 
 				}else{
 					$date_array[]	=	array(
+							"trans_dt"    	=> $date,
+
 							"attn_dt"		=>	$attnDt,
 
 							"sl_no"			=> $maxSl,
@@ -174,17 +181,42 @@
 			}
 		}
 
+	/****************************View Entered Status(For Sanjay)****************************/
+		public function viewAllstatus(){
+				$title['title']      	= 'Claim-View Attendance Status';
+				$user_id 			 	= $this->session->userdata('loggedin')->user_id;
+				$date				 	= date('Y-m-d');
+
+				$transDt 				= $this->input->get('trans_dt');
+				$slNo					= $this->input->get('sl_no');
+
+				$data['dtls']   	 	= $this->AttnModel->attn_view_all($transDt,$slNo);
+
+				$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
+
+				$title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
+
+				$title['total_reject']  = $this->Process->countRejClaim('tm_claim');
+
+				$this->load->view('templetes/welcome_header',$title);
+
+				$this->load->view("statusview/viewAllstatus",$data);
+
+	            $this->load->view('templetes/welcome_footer');
+		}	
+
 	/***********************Delete Entry(Sanjay can view)*************************************/
 		public function delAttn(){
 			$title['title']      	= 'Claim-View Attendance Status';
 			$user_id 			 	= $this->session->userdata('loggedin')->user_id;
 			$date				 	= date('Y-m-d');
 
-			$attnDt 				= $this->input->get('attn_dt');
-			$empNo					= $this->input->get('emp_cd');
-			$status 				= $this->input->get('status');
+			$transDt 				= $this->input->post('trans_dt');
+			$slNo					= $this->input->post('sl_no');
 
-			$this->AttnModel->delete_status($attnDt,$empNo,$status);
+			$this->AttnModel->delete_status($transDt,$slNo);
+
+			$this->AttnModel->delete_dates($transDt,$slNo);
 
 			redirect('attendance/attn');
 		}

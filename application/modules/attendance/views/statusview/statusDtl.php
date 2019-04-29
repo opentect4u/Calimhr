@@ -7,30 +7,34 @@
       <ul>
 
     <li>
+    	<label for="attn_dt" class="field-split align-left labelstyle">Date</label>
 	    <input type="text" name="attn_dt" 
 	           style="width:400px;" 
 	           class="field-style field-split align-left" 
 	           value= "<?php echo date('d/m/Y',strtotime($dtls->attn_dt)); ?>"
 	           readonly>
 	</li>  	
-	<br>
+	<li><br></li>
 	 <li>
+	 	<label for="emp_cd" class="field-split align-left labelstyle">Employee Code</label>
 	    <input type="text" name="emp_cd"
 	    	   style="width:400px;" 
 	    	   class="field-style field-split align-left" 
 	    	   value= "<?php echo $dtls->emp_cd; ?>"
 	    	   readonly>
 	 </li>
-	 <br>
+	 <li><br></li>
 	 <li>
+	 	<label for="emp_name" class="field-split align-left labelstyle">Name</label>
 	    <input type="text" name="emp_name"
 	    	   style="width:400px;" 
 	    	   class="field-style field-split align-left" 
 	    	   value= "<?php echo $dtls->emp_name; ?>"
 	    	   readonly>
 	 </li>
-	 <br>
+	 <li><br></li>
 	 <li>
+	 	<label for="status" class="field-split align-left labelstyle">Status</label>
 	    <input type="text" name="status"
 	    	style="width:400px;" 
 	    	class="field-style field-split align-left" 
@@ -48,17 +52,27 @@
 	    			?>"
 	    	readonly >
 	 </li>
-	 <br>
+	 <li><br></li>
 	  <li>
+	  	<label for="in_out_time" class="field-split align-left labelstyle">Time</label>
 	    <input type="text" name="in_out_time"
 	    	style="width:400px;" 
 	    	class="field-style field-split align-left" 
 	    	value= "<?php echo $dtls->in_out_time; ?>"
 	    	readonly >
 	 </li>
-	 </li>
-	 <br>
+	 <li><br></li>
 	 <li>
+	  	<label for="no_of_days" class="field-split align-left labelstyle">Days</label>
+	    <input type="text" name="in_out_time"
+	    	style="width:400px;" 
+	    	class="field-style field-split align-left" 
+	    	value= "<?php echo $dtls->no_of_days; ?>"
+	    	readonly >
+	 </li>
+	 <li><br></li>
+	 <li>
+	 	<label for="remarks" class="field-split align-left labelstyle">Remarks</label>
 		<textarea type="text"class= "field-style field-split align-left" style="width:400px" name = "remarks" placeholder="Remarks" readonly><?php echo $dtls->remarks; ?></textarea>       
 	</li>	 
      </ul>	
