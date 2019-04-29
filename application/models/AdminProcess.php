@@ -952,11 +952,18 @@ public function getDetailsbyEmpNo($t_name,$emp_no){
 	}
 
 	public function attnDetails($from_date,$to_date,$emp_no){
-		$this->db->where('emp_cd' , $emp_no);
-		$this->db->where('attn_dt >= ' , $from_date);
-		$this->db->where('attn_dt <= ' , $to_date);		
-		$query = $this->db->get('td_in_out');
+		$sql   = "select a.attn_dt attn_dt,a.emp_cd emp_cd,a.status lv_status,
+						 b.in_out_time in_out_time,b.remarks remarks
+				  from   td_dates a, td_in_out b
+				  where  a.trans_dt = b.trans_dt
+			      and    a.sl_no    = b.sl_no
+			      and    a.attn_dt  between '$from_date' and '$to_date'
+				  and    a.emp_cd   = $emp_no";
+
+		$query = $this->db->query($sql);
+
 		$this->set_dt($from_date,$to_date);
+
 		if($query->num_rows() > 0) {
 	       foreach ($query->result() as $row) {
     	        $data[] = $row;

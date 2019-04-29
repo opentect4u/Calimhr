@@ -58,18 +58,22 @@
 			                	foreach ($alldata as $aldta):?>
 			                <tr>
 			                  	<td class="center"><?php echo date('d/m/Y',strtotime($aldta->attn_dt));?></td>
-			                  	<td class="center"><?php if($aldta->status=='L'){
+			                  	<td class="center"><?php if($aldta->lv_status=='L'){
                                                       echo "Late In";
-                                                    }elseif($aldta->status=='O'){
+                                                    }elseif($aldta->lv_status=='O'){
                                                       echo "Early Out";  
-                                                    }elseif($aldta->status=='H'){
+                                                    }elseif($aldta->lv_status=='H'){
                                                       echo "Half";  
+                                                    }elseif($aldta->lv_status=='E'){
+                                                      echo "Early Out";
+                                                    }elseif($aldta->lv_status=='A'){
+                                                      echo "Absent";
                                                     }else{
-                                                      echo Absent;
+                                                      echo "Client Site";  
                                                     }
                                              ?>
                           </td>
-			                  	<td class="center"><?php echo $aldta->in_out_time;?></td>   
+			                  	<td class="center"><?php echo $aldta->in_out_time;?></td>  
 			                  	<td class="center"><?php echo $aldta->remarks;?></td>
 			                </tr>
 			                <?php	 
