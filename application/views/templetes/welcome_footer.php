@@ -224,6 +224,9 @@
         </div>
       </div>
     </div>
+
+<!--***********************Leave Reports****************************-->
+    <!--Employee wise leave Application-->
     <div class="modal fade" id="leaveDtl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -239,6 +242,24 @@
         </div>
       </div>
     </div>
+
+    <!--All employee application-->
+    <div class="modal fade" id="leaveApl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Leave Application</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body" id="leave-apl">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -357,6 +378,7 @@
           });
       });
 
+//Leave application for an employee
     $('.leave_dtls').click(function(){
         $.get( "<?php echo base_url().'index.php/leave/leave_dtl_ajax'?>")
           .done(function( data ) {
@@ -364,6 +386,15 @@
             $('#leaveDtl').modal('show');
           });
       });
+//Leave Application for all employee
+    $('.leave_apl').click(function(){
+        $.get( "<?php echo base_url().'index.php/leave/leave_apl_ajax'?>")
+          .done(function( data ) {
+            $('#leave-apl').html(data);
+            $('#leaveApl').modal('show');
+          });
+      });
+
       
     $('.distWiseExp').click(function(){
         $.get( "<?php echo base_url().'index.php/admin/distWiseExp_ajax'?>")

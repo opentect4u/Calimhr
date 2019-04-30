@@ -40,12 +40,22 @@
 	        <input type="text" name="status" style="width:300px;display:inline;margin-left:20px" 
 	               class="field-style field-split align-left"value="<?php if($dtls->status =='H'){
 																				echo "Half";	
-																		  }elseif($dtls->status =='A'){
-																		  		echo "Absent";
+																		  }elseif($dtls->status =='C'){
+																		  		echo "CL";
+																		  }elseif($dtls->status =='E'){
+																		  		echo "EL";
+																		  }elseif($dtls->status =="M"){
+																		  		echo "ML";
 																		  }elseif($dtls->status =="E"){
 																		  		echo "Early Out";
+																		  }elseif($dtls->status =="W"){
+																		  		echo "LWP";
 																		  }elseif($dtls->status=="L"){
 																		  		echo "Late In";
+																		  }elseif($dtls->status=="O"){
+																		  		echo "Holiday Half";
+																		  }elseif($dtls->status=="F"){
+																		  		echo "Holiday Full";
 																		  }else{
 																		  		echo "Client Site";
 																		  }

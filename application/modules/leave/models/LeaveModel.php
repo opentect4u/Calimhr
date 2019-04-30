@@ -111,7 +111,7 @@
 		return 1;
 	}
 
-		public function leaveDetails($from_date,$to_date,$emp_no){
+	public function leaveDetails($from_date,$to_date,$emp_no){
 			$this->db->where('emp_code' 	, $emp_no);
 			$this->db->where('from_dt >= '  , $from_date);
 			$this->db->where('from_dt <= '  , $to_date);		
@@ -125,6 +125,27 @@
         	return $data;
     	}
 	}
+
+	public function leaveAppl($from_date,$to_date){
+
+		$sql   = "select a.appl_dt appl_dt,a.appl_no appl_no,a.emp_code emp_code,a.leave_type leave_type,
+					     a.from_dt from_dt,a.to_dt to_dt,a.days days,a.remarks remarks,b.emp_name emp_name
+				  from   td_leave_trans a,mm_employee b
+				  where  a.emp_code = b.emp_no
+				  and    a.approval_status = 'A'
+				  and    a.from_dt between '$from_date' and '$to_date'
+				  order by a.appl_dt,a.appl_no";
+
+		$query = $this->db->query($sql);
+
+		if($query->num_rows() > 0) {
+			foreach ($query->result() as $row) {
+				$data[] = $row;
+			}
+			return $data;
+		}
+	}
+
 }
 
 ?>

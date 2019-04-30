@@ -20,10 +20,15 @@
 	    <select class="field-style field-split align-left" style="width:400px;" name="status" id="status">
 	    	<option value="">Select Attendance Status</option>
 	    	<option value="L">Late In</option>
-	    	<option value="E">Early Out</option>
+	    	<option value="R">Early Out</option>
 	    	<option value="H">Half</option>
-	    	<option value="A">Absent</option>
-	    	<option value="C">Client Site</option>
+	    	<option value="C">Absent(CL)</option>
+	    	<option value="E">Absent(EL)</option>
+	    	<option value="M">Absent(ML)</option>
+	    	<option value="I">Client Site</option>
+	    	<option value="W">LWP</option>
+	    	<option value="O">Holiday Half</option>
+	    	<option value="F">Holiday Full</option>
 	    </select>
 	 </li>
 	 <br>
@@ -77,12 +82,23 @@
 
    $(document).ready(function(){
    		$("#status").change(function(){
-   			if($("#status").val()=='A' || $("#status").val()=='C'){
+   			if($("#status").val()=='C' || $("#status").val()=='E' || $("#status").val()=='M'){
    				$("#time").hide();
    				$(".attn_br").hide();
    				$("#days").show();
    				$("#end_dt").show();
    				$(".hide_br").show();
+   			}else if($("#status").val()=='I'){
+   				$("#time").hide();
+   				$(".attn_br").hide();
+   				$("#days").show();
+   				$("#end_dt").show();
+   				$(".hide_br").show();
+   			}else if($("#status").val()=='W' || $("#status").val()=='O' || $("#status").val()=='F'){
+   				$("#days").hide();
+   				$("#time").hide();
+   				$("#end_dt").hide();
+   				$(".hide_br").hide();
    			}else{
    				$("#days").hide();
    				$("#time").show();

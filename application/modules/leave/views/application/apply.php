@@ -33,7 +33,6 @@
 			<option value = "C">CL</option>
 			<option value = "E">EL</option>
 			<option value = "M">ML</option>
-			<option value = "H">HL</option>
 		</select>
 
 		<input type="hidden" name="lvno" style="width:300px;display:inline;margin-left:5px" 

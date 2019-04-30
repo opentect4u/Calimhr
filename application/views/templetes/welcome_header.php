@@ -182,11 +182,11 @@
 
           <?php 
           if(($this->session->userdata('loggedin')->user_id=='36')) {?>
-          <li class="attn_dtls">
+          <!--<li class="attn_dtls">
               <a class="nav-link" data-toggle="modal" data-target="#attnDtl">Attendance Report</a>
-          </li>
-          <li class="leave_dtls">
-            <a class="nav-link" data-toggle="modal" data-target="#leaveDtl">Leave Report</a>
+          </li>-->
+          <li class="leave_apl">
+            <a class="nav-link" data-toggle="modal" data-target="#leaveApl">Leave Application</a>
           </li>
           <?php } ?>
     </ul>

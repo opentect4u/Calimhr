@@ -44,15 +44,25 @@
 		  			<td><?php $stType = $values->status;
 			    			if($stType == 'L'){
 			    				$stType = 'Late In';
-			    			}elseif($stType == 'E'){
+			    			}elseif($stType == 'R'){
 			    				$stType = 'Early Out';
 			    			}elseif($stType == 'H'){
                   $stType = 'Half';
-                }elseif($stType == 'C'){
+                }elseif($stType == 'I'){
                   $stType = 'Client Site';
-                }else{
-			    				$stType = 'Absent';
-			    			}
+                }elseif($stType == 'C'){
+			    				$stType = 'CL';
+			    			}elseif($stType == 'E'){
+                  $stType = 'EL';
+                }elseif($stType == 'M'){
+                  $stType = 'ML';
+                }elseif($stType == 'W'){
+                  $stType = 'LWP';
+                }elseif($stType == 'O'){
+                  $stType = 'Holiday Half';
+                }elseif($stType == 'C'){
+                  $stType = 'Holiday Full';
+                }
 							echo $stType;		   
 		       			?>
 		  			</td>

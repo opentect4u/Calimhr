@@ -40,15 +40,25 @@
 	    	class="field-style field-split align-left" 
 	    	value= "<?php if($dtls->status=='L'){
 	    						echo "Late In";
-	    				  }elseif($dtls->status=='E'){
-	    				  		echo "Early Out";
-	    				  }elseif($dtls->status=='H'){
-	    				  	    echo "Half";
-	    				  }elseif($dtls->status=='C'){
-                  				echo "Client Site";		
-	    				  }else{
-	    				  	    echo "Absent"; 	
-	    				  }
+	    				  }elseif($dtls->status == 'R'){
+			                    echo 'Early Out';
+			              }elseif($dtls->status == 'H'){
+			                    echo 'Half';
+		                  }elseif($dtls->status == 'I'){
+		                        echo 'Client Site';
+		                  }elseif($dtls->status == 'C'){
+		                        echo 'CL';
+		                  }elseif($dtls->status == 'E'){
+		                        echo 'EL';
+		                  }elseif($dtls->status == 'M'){
+		                  		echo 'ML';
+		                  }elseif($dtls->status == 'W'){
+		                  		echo 'LWP';
+		                  }elseif($dtls->status == 'O'){
+		                  		echo 'Holiday Half';
+		                  }elseif($dtls->status == 'F'){
+		                  		echo 'Holiday Full';
+		                  }
 	    			?>"
 	    	readonly >
 	 </li>
