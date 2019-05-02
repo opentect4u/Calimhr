@@ -338,6 +338,9 @@
                     <li class="leave_dtls">
                       <a class="nav-link" data-toggle="modal" data-target="#leaveDtl">Leave Status</a>
                     </li>
+                    <li class="lv_balance">
+                      <a class="nav-link" data-toggle="modal" data-target="#empLvBalns">Leave Balance</a>
+                    </li>
                     <?php
                     }
                     if ($this->session->userdata('loggedin')->user_type == 'AC') {?>

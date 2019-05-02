@@ -941,9 +941,10 @@ public function getDetailsbyEmpNo($t_name,$emp_no){
 	public function opening_balance($from_date, $emp_no) {
 		$sql = "SELECT * FROM tm_balance_amt
 			WHERE emp_no = $emp_no and
-					balance_dt = (SELECT min(balance_dt)
+					balance_dt = (SELECT max(balance_dt)
                     from   tm_balance_amt
-                    WHERE  balance_dt <= '$from_date')";
+                    WHERE  balance_dt < '$from_date'
+                	and    emp_no  = $emp_no)";
 		                    
 		$query = $this->db->query($sql);
 		

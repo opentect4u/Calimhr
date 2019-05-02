@@ -119,6 +119,7 @@
         </div>
       </div>
     </div>
+    <!--****************All Employee Balance Admin Report*****************8-->
     <div class="modal fade" id="empClBalns" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -134,6 +135,7 @@
         </div>
       </div>
     </div>
+
     <div class="modal fade" id="totalClaimDtl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -243,7 +245,7 @@
       </div>
     </div>
 
-    <!--All employee application-->
+    <!--**********************All employee Leave application***********************-->
     <div class="modal fade" id="leaveApl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -255,6 +257,23 @@
           </div>
           <div class="modal-body" id="leave-apl">
 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--*************************Employee Leave Balances Admin Report******** -->
+    <div class="modal fade" id="empLvBalns" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Leave Balance</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body" id="empLv-dtl">
+           
           </div>
         </div>
       </div>
@@ -337,7 +356,7 @@
             $('#alclbalns').modal('show');
           });
       });
-
+/********All Employees Balances******************************/
     $('.emp_cl_balance').click(function(){
         $.get( "<?php echo base_url().'index.php/admin/emp_balance_ajax'?>")
           .done(function( data ) {
@@ -392,6 +411,15 @@
           .done(function( data ) {
             $('#leave-apl').html(data);
             $('#leaveApl').modal('show');
+          });
+      });
+
+//Leave Balances
+     $('.lv_balance').click(function(){
+        $.get( "<?php echo base_url().'index.php/leave/lv_balance_ajax'?>")
+          .done(function( data ) {
+            $('#empLv-dtl').html(data);
+            $('#empLvBalns').modal('show');
           });
       });
 

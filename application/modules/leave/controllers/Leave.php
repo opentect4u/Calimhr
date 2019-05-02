@@ -170,7 +170,7 @@
 				$no = $this->input->post('days');
 				$no = -1 * $no;
 				
-				$insert_data	= array(
+				/*$insert_data	= array(
 					"balance_dt"		=> $this->input->post('appldt'),
 					"trans_cd"			=> $this->input->post('applno'),
 					"emp_no"			=> $this->input->post('empcd'),
@@ -178,13 +178,13 @@
 					"leave_type"		=> $this->input->post('lvtype'),
 					"leave_no"		    => $no,
 					"to_dt"				=> $this->input->post('todt')
-				);
+				);*/
 
 				$this->LeaveModel->editData('td_leave_trans',$data_array,$where_array);
 
-				if($this->input->post('aprvStatus')=='A'){
+				/*if($this->input->post('aprvStatus')=='A'){
 					$this->LeaveModel->insertData('td_leave_balance',$insert_data);
-				}	
+				}	*/
 				$this->session->set_flashdata('msg','Save Successful');	
 
 				redirect('leave/showLeave');
@@ -270,6 +270,34 @@
 	    public function leave_apl_ajax(){
 			$this->load->view('report/leaveAplModal');
 	    }
+
+	    public function lv_balance_ajax(){
+			$this->load->view('report/lvBalanceModal');
+	    }
+
+	    public function lvBalance() {
+			$title['title'] = 'Claim-Leave Details';
+
+			$date1_temp 	= DateTime::createFromFormat('d/m/Y',$_POST['date1']);
+			$from_date 		= $date1_temp->format('Y-m-d');
+
+
+			$result['emp_dtls'] = $this->AdminProcess->getAll('mm_employee');
+ 
+			$result['lvBalance'] = $this->LeaveModel->lvBalanceAll($from_date);
+
+			$result['date'] = array($from_date);
+		 
+
+			$title['total_claim'] 	= $this->AdminProcess->countClaim('mm_manager');
+	    	$title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
+	    	$title['total_reject'] 	= $this->Process->countRejClaim('tm_claim');
+
+			$this->load->view('templetes/welcome_header',$title);
+			$this->load->view('report/levBalance',$result);
+			$this->load->view('templetes/welcome_footer');
+		}
+
 
 }
 ?>		

@@ -20,7 +20,8 @@
 		public function leaveTrans($empNo,$date){
 			$data = $this->db->query("select * from td_leave_trans
 				  	  				  where  emp_code   = $empNo
-					  				  and    to_dt    	>= '$date'");
+					  				  and    (to_dt    	>= '$date'
+					  				  or    approval_status = 'U')");
 
 
 			return $data->result();
@@ -144,6 +145,30 @@
 			}
 			return $data;
 		}
+	}
+
+	public function lvBalanceAll($from_date){
+		$sql = "select emp_no,max(balance_dt)balance_dt from td_leave_balance where balance_dt<='$from_date' and emp_no in(select emp_no from mm_employee where status_flag = 1) group by emp_no";
+
+		$query = $this->db->query($sql);
+
+		foreach ($query->result() as $row) {
+            $data[] = $row;
+        }
+        for ($i=0; $i < sizeof($data); $i++) { 
+			$this->db->select('emp_no');
+			$this->db->select('cl');
+			$this->db->select('el');
+			$this->db->select('ml');
+			$this->db->select('hl');
+			$this->db->select('lwp');
+			$this->db->where('emp_no', $data[$i]->emp_no);
+			$this->db->where('balance_dt', $data[$i]->balance_dt);
+			$result = $this->db->get('td_leave_balance');
+    		$count[] = $result->row();
+    	}
+		return $count;
+         
 	}
 
 }
