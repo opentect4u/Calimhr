@@ -228,12 +228,12 @@
     </div>
 
 <!--***********************Leave Reports****************************-->
-    <!--Employee wise leave Application-->
+    <!--Employee wise leave And Attendance Report-->
     <div class="modal fade" id="leaveDtl" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Leave Details</h5>
+            <h5 class="modal-title">Status Details</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>

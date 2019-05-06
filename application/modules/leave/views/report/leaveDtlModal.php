@@ -2,23 +2,9 @@
 
 <form method="post" action="<?php echo site_url("leave/leaveDetails");?>">
   <div class="form-row">
-    <div class="form-group col-md-8">
-        <label for="emp_name">Employee's Name</label>
-        <div class="col-xs-4">
-          <select class="form-control preferenceSelect" id="emp_no" name="emp_no" required style="width: 470px;">
-          <option>Select</option>
-          <?php
-            if ($dtls) {
-                foreach ($dtls as $aldta) {?>
-                  <option value="<?php echo $aldta->emp_no;?>">
-                  <?php echo $aldta->emp_name;?></option>
-          <?php
-                  }
-                }
-          ?>
-        </select>
-        </div>
-      </div>
+   <div class="form-group">
+      <label style="padding-left: 7px;">Employee's Name :</label> <?php echo $this->session->userdata('loggedin')->emp_name; ?>
+    </div>
   </div>
   <br>
   <div class="form-row why"> 

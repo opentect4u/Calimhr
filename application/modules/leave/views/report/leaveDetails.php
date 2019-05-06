@@ -32,7 +32,7 @@
     		<h3 style="text-align: center;">SYNERGIC SOFTEK SOLUTIONS PVT. LTD.</h3>
     		<h4 style="text-align: center;">55 D, DESAPRAN SASHMAL ROAD</h4>
     		<h5 style="text-align: center;">KOLKATA-33</h5>
-    		<h5 style="text-align: center;">Leave status for the period of <?php echo date('d/m/Y', strtotime($date->from_date)).' to '.date('d/m/Y', strtotime($date->to_date));?></h5>
+    		<h5 style="text-align: center;">Leave & Attendance Between <?php echo date('d/m/Y', strtotime($date->from_date)).' to '.date('d/m/Y', strtotime($date->to_date));?></h5>
     		<hr>
     		<?php
         if ($alldata && $emp_dtls && $date) {
@@ -42,42 +42,74 @@
 				Employee Name : <?php echo $alldta->emp_name;?><?php }?><br style="line-height: 28px;">
 			</div>
 			<hr>
+      <div class="card">
+        <div class="table">
+          <table class="table table-bordered width" id="dataTable" cellpadding="4">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>CL</th>
+                <th>EL</th>
+                <th>ML</th>
+                <th>Holiday</th>
+                <th>LWP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><?php echo date('d/m/Y',strtotime($opndata->balance_dt)); ?>
+                <td><?php echo $opndata->cl; ?>
+                <td><?php echo $opndata->el; ?>
+                <td><?php echo $opndata->ml; ?>
+                <td><?php echo $opndata->hl; ?>
+                <td><?php echo $opndata->lwp; ?>
+              </tr>
+            </tbody>
+          </table>  
+        </div>
+      </div>
+      <hr>
 	    	<div class="card">
 	          	<div class="table">
 		           	<table class="table table-bordered width" id="dataTable" cellpadding="4">
 	              		<thead>
 	                		<tr>
 			                	<th>Date</th>
-                        <th>Period</th>
                         <th>Type</th>
-			                  <th>Status</th>
+                        <th>Time</th>
+			                  <th>Remarks</th>
 	                		</tr>
 	              		</thead>
 	              		<tbody>
 	              			<?php if($alldata){
 			                	foreach ($alldata as $aldta):?>
 			                <tr>
-			                  	<td class="center"><?php echo date('d/m/Y',strtotime($aldta->appl_dt));?></td>
-                          <td class="center"><?php echo date('d/m/Y',strtotime($aldta->from_dt)).' to '.date('d/m/Y',strtotime($aldta->to_dt));?></td>
-			                  	<td class="center"><?php if($aldta->leave_type=='C'){
+			                  	<td class="center"><?php echo date('d/m/Y',strtotime($aldta->attn_dt));?></td>
+			                  	<td class="center"><?php if($aldta->status=='C'){
                                                       echo "CL";
                                                     }elseif($aldta->status=='M'){
                                                       echo "ML";  
+                                                    }elseif($aldta->status=='E'){
+                                                      echo "EL";  
+                                                    }elseif($aldta->status=='R'){
+                                                      echo "Early Out";
+                                                    }elseif($aldta->status=='L'){
+                                                      echo "Late In";
                                                     }elseif($aldta->status=='H'){
-                                                      echo "HL";  
-                                                    }else{
-                                                      echo "EL";
+                                                      echo "Half";
+                                                    }elseif($aldta->status=='I'){
+                                                      echo "Client Site";
+                                                    }elseif($aldta->status=='W'){
+                                                      echo "LWP";
+                                                    }elseif($aldta->status=='O'){
+                                                      echo "Holiday Half";
+                                                    }elseif($aldta->status=='F'){
+                                                      echo "Holiday Full";
                                                     }
                                              ?>
                           </td>
-			                  	<td class="center"><?php if($aldta->approval_status=='A'){
-                                                      echo "Approved";
-                                                   }elseif($aldta->status=='R'){
-                                                      echo "Rejected"; 
-                                                   }else{
-                                                      echo "Pending For Approval";
-                                                  }
-                                              ?></td>   
+			                  	<td class="center"><?php echo $aldta->ent_time;?></td>   
+                          <td class="center"><?php echo $aldta->remarks;?></td>
 			                </tr>
 			                <?php	 
                         endforeach;
@@ -87,10 +119,37 @@
 		            </table>
 		            <?php }?>
 	          	</div>
-	      			<div class="card-footer">
-        				<button class="btn print-btn tValHide" type="button" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Print" style="width: 95px;" id="" onclick="printClaimDtls();"><i class="fa fa-print fa-lg" aria-hidden="true"></i></button>
-        			</div>
     		</div>
+        <hr>
+        <div class="card">
+        <div class="table">
+          <table class="table table-bordered width" id="dataTable" cellpadding="4">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>CL</th>
+                <th>EL</th>
+                <th>ML</th>
+                <th>Holiday</th>
+                <th>LWP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><?php echo date('d/m/Y',strtotime($clsdata->balance_dt)); ?>
+                <td><?php echo $clsdata->cl; ?>
+                <td><?php echo $clsdata->el; ?>
+                <td><?php echo $clsdata->ml; ?>
+                <td><?php echo $clsdata->hl; ?>
+                <td><?php echo $clsdata->lwp; ?>
+              </tr>
+            </tbody>
+          </table>  
+        </div>
+        <div class="card-footer">
+                <button class="btn print-btn tValHide" type="button" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Print" style="width: 95px;" id="" onclick="printClaimDtls();"><i class="fa fa-print fa-lg" aria-hidden="true"></i></button>
+              </div>
+      </div>
     	</div>
 	</div>
 </div>

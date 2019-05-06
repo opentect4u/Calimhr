@@ -113,10 +113,14 @@
 	}
 
 	public function leaveDetails($from_date,$to_date,$emp_no){
-			$this->db->where('emp_code' 	, $emp_no);
-			$this->db->where('from_dt >= '  , $from_date);
-			$this->db->where('from_dt <= '  , $to_date);		
-			$query = $this->db->get('td_leave_trans');
+			$query = $this->db->query("select a.attn_dt attn_dt,a.status status,a.sl_no,a.emp_cd,
+									          b.in_out_time ent_time,b.remarks remarks
+									   from   td_dates a,td_in_out b
+									   where  a.attn_dt = b.attn_dt
+									   and    a.sl_no   = b.sl_no
+									   and    a.emp_cd  = $emp_no
+									   and    a.attn_dt between '$from_date' and '$to_date'");
+
 			$this->set_dt($from_date,$to_date);
 
 			if($query->num_rows() > 0) {
@@ -169,6 +173,30 @@
     	}
 		return $count;
          
+	}
+
+	public function lvopn_bal($from_dt,$emp_no){
+		$sql = "select * from td_leave_balance
+				where  balance_dt = (select max(balance_dt) from td_leave_balance
+									 where  balance_dt < '$from_dt'
+									 and    emp_no     = $emp_no)
+				and    emp_no     = $emp_no";
+
+		$query = $this->db->query($sql);
+
+		return $query->row();
+	}
+
+	public function lvcls_bal($to_dt,$emp_no){
+		$sql = "select * from td_leave_balance
+				where  balance_dt = (select max(balance_dt) from td_leave_balance
+									 where  balance_dt <= '$to_dt'
+									 and    emp_no     = $emp_no)
+				and    emp_no     = $emp_no";
+
+		$query = $this->db->query($sql);
+
+		return $query->row();
 	}
 
 }

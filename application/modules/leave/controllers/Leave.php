@@ -217,27 +217,34 @@
 	    public function leaveDetails() {
 			$title['title'] = 'Claim-Leave Details';
 			$t_name = 'mm_employee';
+
 			$date1_temp = DateTime::createFromFormat('d/m/Y',$_POST['date1']);
+
 			$from_date = $date1_temp->format('Y-m-d');
 
 			$date2_temp = DateTime::createFromFormat('d/m/Y',$_POST['date2']);
+
 			$to_date = $date2_temp->format('Y-m-d');
-			$emp_no = $this->input->post('emp_no');
+
+			$emp_no = $this->session->userdata('loggedin')->emp_no;
 
 			$data['alldata']  = $this->LeaveModel->leaveDetails($from_date,$to_date,$emp_no);
+			$data['opndata']  = $this->LeaveModel->lvopn_bal($from_date,$emp_no);
+			$data['clsdata']  = $this->LeaveModel->lvopn_bal($to_date,$emp_no);
+
 			$data['emp_dtls'] = $this->AdminProcess->getDetailsbyEmpNo($t_name,$emp_no);
-			$data['date'] = $this->AdminProcess->get_dt();
-			$title['total_claim'] = $this->AdminProcess->countClaim('mm_manager');
+			$data['date'] 	  = $this->AdminProcess->get_dt();
+
+			$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
 	    	$title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
-	    	$title['total_reject'] = $this->Process->countRejClaim('tm_claim');
+	    	$title['total_reject']  = $this->Process->countRejClaim('tm_claim');
 
 			$this->load->view('templetes/welcome_header',$title);
-			$this->load->view('SU/leaveDetails',$data);
+			$this->load->view('report/leaveDetails',$data);
 			$this->load->view('templetes/welcome_footer');
 		}
 	    public function leave_dtl_ajax(){
-	    	$result['dtls'] = $this->AdminProcess->getAll('mm_employee');
-			$this->load->view('SU/leaveDtlModal',$result);
+			$this->load->view('report/leaveDtlModal');
 	    }
 
 	    //For Leave application

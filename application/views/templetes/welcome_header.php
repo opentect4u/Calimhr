@@ -295,6 +295,9 @@
             <li class="userPayment_dtls">
               <a class="nav-link" data-toggle="modal" data-target="#userPaymentDtl">Payment Details</a>
             </li>
+            <li class="leave_dtls">
+              <a class="nav-link" data-toggle="modal" data-target="#leaveDtl">Leave & Attendance</a>
+            </li>
               <?php
                 if ($this->session->userdata('loggedin')->user_type != 'E') {?>
                 <li>
@@ -359,13 +362,9 @@
                     <li class="attn_dtls">
                       <a class="nav-link" data-toggle="modal" data-target="#attnDtl">Attendance Status</a>
                     </li>
-                    <li class="leave_dtls">
-                      <a class="nav-link" data-toggle="modal" data-target="#leaveDtl">Leave Status</a>
-                    </li>
                     <?php
                     }
                     ?>
-                    
                   </ul>
                 </li>
                 <?php } ?>
