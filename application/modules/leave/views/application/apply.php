@@ -115,13 +115,13 @@
     		var mm = toDt.getMonth() + 1;
     		var y  = toDt.getFullYear();
 
-    		if(dd < 9){
+    		if(dd <= 9){
     			dd = '0' + dd;
     		}else{
     			dd = dd;
     		}
 
-    		if(mm < 9){
+    		if(mm <= 9){
     			mm = '0' + mm;
     		}else{
     			mm = mm;
