@@ -195,6 +195,7 @@
 
 	                    </tr>
 
+
 	                    <tr class="t2">
 	                        <td class="left_algn">Misc.Allowance</td>
 	                        <td class="right_algn"><?php echo $data_dtls->misc_amt; ?></td>
@@ -214,6 +215,14 @@
 	                    <tr class="t2">
 	                        <td class="left_algn">Project Allowance</td>
 	                        <td class="right_algn"><?php echo $data_dtls->proj_amt; ?></td>
+	                        <td></td><td></td>
+	                        
+
+	                    </tr>
+
+	                    <tr class="t2">
+	                        <td class="left_algn">Conveyance Allowance</td>
+	                        <td class="right_algn"><?php echo $data_dtls->conv_allow; ?></td>
 	                        <td></td><td></td>
 	                        
 
