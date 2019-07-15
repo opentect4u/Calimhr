@@ -55,6 +55,9 @@
       $('#save').prop('type','button');
       $('#pname').show();
     }
+    else{
+      $('#save').prop('type','submit');
+    }
 
     if(purpose == 0){
       $('#save').prop('type','button');
