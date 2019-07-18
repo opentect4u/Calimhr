@@ -308,7 +308,7 @@ class Admin extends CI_Controller {
 		$this->load->view('SU/editProjectTypeModal',$data);
 	}
 	public function add_project_type_ajax(){
-	    $result['maxCode'] = $this->AdminProcess->maxCode('mm_project_type','type_cd');
+	    $result['maxCode'] = $this->AdminProcess->maxTransCode('mm_project_type','type_cd');
 		$this->load->view('SU/addProjectTypeModal', $result);
 	}
 
@@ -404,7 +404,7 @@ class Admin extends CI_Controller {
 	}
 	public function add_project_ajax(){
 		$result['alldata'] = $this->AdminProcess->getAll('mm_project_type');
-		$result['maxCode'] = $this->AdminProcess->maxCode('mm_project','project_cd');
+		$result['maxCode'] = $this->AdminProcess->maxTransCode('mm_project','project_cd');
 		$this->load->view('SU/addProjectModal',$result);
 	}
 
@@ -578,7 +578,7 @@ class Admin extends CI_Controller {
 		$this->load->view('SU/editClaimHeadModal',$data);
 	}
 	public function add_claim_head_ajax(){
-	    $result['maxCode'] = $this->AdminProcess->maxCode('mm_claim_head','head_cd');
+	    $result['maxCode'] = $this->AdminProcess->maxTransCode('mm_claim_head','head_cd');
 		$this->load->view('SU/addClaimHeadModal', $result);
 	}
 
