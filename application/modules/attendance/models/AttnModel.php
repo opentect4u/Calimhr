@@ -2,6 +2,35 @@
 	defined('BASEPATH') or exit('No direct script access allowed');
 
 	class AttnModel extends CI_MODEL{
+
+		public function f_get_particulars($table_name, $select=NULL, $where=NULL, $flag) {
+        
+			if(isset($select)) {
+	
+				$this->db->select($select);
+	
+			}
+	
+			if(isset($where)) {
+	
+				$this->db->where($where);
+	
+			}
+	
+			$result		=	$this->db->get($table_name);
+	
+			if($flag == 1) {
+	
+				return $result->row();
+				
+			}else {
+	
+				return $result->result();
+	
+			}
+	
+		}
+
 		public function AttnTrans(){			/*All Entries entered on a particular date(attn)*/
 			$this->db->select('*');
 			$this->db->where('adj_flag','U');
@@ -75,5 +104,54 @@
 			$this->db->where('sl_no'   ,$sl_no);
 			$this->db->delete('td_dates');
 		}
+
+		public function f_adjustable($last_adjusted_dt){
+
+			// //Counting Late
+			$where = array(
+				"status = 'L' OR status = 'R'" => NULL,
+				"attn_dt > '".$last_adjusted_dt."' AND attn_dt <= '".date('Y-m-d')."' GROUP BY emp_cd, emp_name" => NULL
+			);
+			$data['lates'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'COUNT(status) late'), $where, 0);
+
+			//Counting Half
+			$where = array(
+				"status = 'H'" => NULL,
+				"attn_dt > '".$last_adjusted_dt."' AND attn_dt <= '".date('Y-m-d')."' GROUP BY emp_cd, emp_name" => NULL
+			);
+			$data['halfs'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'COUNT(status) half'), $where, 0);
+
+			//Counting Holiday Half
+			$where = array(
+				"status = 'O'" => NULL,
+				"attn_dt > '".$last_adjusted_dt."' AND attn_dt <= '".date('Y-m-d')."' GROUP BY emp_cd, emp_name" => NULL
+			);
+			$data['holiday_halfs'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'COUNT(status) holiday_half'), $where, 0);
+
+			//Counting Holiday Full
+			$where = array(
+				"status = 'F'" => NULL,
+				"attn_dt > '".$last_adjusted_dt."' AND attn_dt <= '".date('Y-m-d')."' GROUP BY emp_cd, emp_name" => NULL
+			);
+			$data['holiday_fulls'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'COUNT(status) holiday_full'), $where, 0);
+
+			return $data;
+		}
+
+		public function f_closing_leave_bals(){
+
+			$sql = "SELECT a.*, m.emp_name FROM 
+					(SELECT `emp_no`, `cl`, `el`, `ml`, `hl`, `lwp`, `balance_dt` FROM td_leave_balance) a,
+					(SELECT `emp_no`, MAX(balance_dt) balance_dt FROM td_leave_balance GROUP BY emp_no) b,
+					mm_employee m
+					WHERE a.emp_no = b.emp_no
+					AND a.balance_dt = b.balance_dt
+					AND a.emp_no = m.emp_no 
+					ORDER BY CAST(a.emp_no as int)";
+
+			return $this->db->query($sql)->result();		
+
+		}
+
 	}
 ?>

@@ -220,5 +220,34 @@
 
 			redirect('attendance/attn');
 		}
+
+		public function adjustment(){
+			if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+			}
+			else{
+
+				$title['title']      	= 'Claim-View Attendance Status';
+				$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
+				$title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
+				$title['total_reject']  = $this->Process->countRejClaim('tm_claim');
+
+				//Last adjustment date
+				$data['adjustment_date'] = $this->Process->f_get_particulars('td_adjustment_dates', array('max(adjustment_date) adjustment_date'), NULL, 1);
+
+				//All employee's unadjusted total late, half, lwp, holiday
+				$data['adjustable'] = $this->AttnModel->f_adjustable($data['adjustment_date']->adjustment_date);
+
+				//All employee's closing leave balances
+				$data['leave_bals'] = $this->AttnModel->f_closing_leave_bals();
+
+				// echo "<pre>";
+				// var_dump($data['adjustable']);die;
+				$this->load->view('templetes/welcome_header',$title);
+				$this->load->view('adjustment/form', $data);
+	            $this->load->view('templetes/welcome_footer');
+
+			}
+		}
 	}
 ?>
