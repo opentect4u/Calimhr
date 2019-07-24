@@ -106,6 +106,9 @@
                                                     }elseif($aldta->status=='F'){
                                                       echo "Holiday Full";
                                                     }
+                                                    elseif($aldta->status=='A'){
+                                                      echo "Adjustment";
+                                                    }
                                              ?>
                           </td>
 			                  	<td class="center"><?php echo $aldta->ent_time;?></td>   

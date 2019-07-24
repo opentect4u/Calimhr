@@ -173,6 +173,9 @@
             <li>
               <a class="nav-link" href="<?php echo site_url('attendance/attn')?>">Attendance Status</a>
             </li>
+            <li>
+              <a class="nav-link" href="<?php echo site_url('attendance/adjustment')?>"><strong>Leave Adjustment</strong></a>
+            </li>
           <?php } ?>
 
           <li>

@@ -222,8 +222,80 @@
 		}
 
 		public function adjustment(){
+
 			if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+				$this->AttnModel->f_edit('td_in_out', array('adj_flag' => 'A'), array("attn_dt BETWEEN '".$this->input->post('last_adjust_date')."' AND '".$this->input->post('latest_adjust_date')."'" => NULL));
+
+				for($i = 0; $i < count($this->input->post('emp_code')); $i++){
+					
+					$data_array[] = (object) array(
+						"emp_code" => $this->input->post('emp_code')[$i],
+						"balance_dt" => $this->input->post('balance_dt')[$i],
+						"cl" => (float)$this->input->post('cl')[$i],
+						"el" => (float)$this->input->post('el')[$i],
+						"ml" => (float)$this->input->post('ml')[$i],
+						"hl" => (float)$this->input->post('hl')[$i],
+						"late" => (float)$this->input->post('late')[$i],
+						"half" => (float)$this->input->post('half')[$i],
+						"lwp" => (float)$this->input->post('lwp')[$i]
+					);
+
+				}
+
+				for($i = 0; $i < count($this->input->post('emp_code')); $i++){
+
+					$adjustable_leave_amt = 0;
+					$adjustable_leave_amt += round(($data_array[$i]->late >= 3)? ($data_array[$i]->late / 3) : 0, 0);
+					$adjustable_leave_amt += $data_array[$i]->half * 0.5;
+							
+					if($adjustable_leave_amt > 0){
+						$data_array[$i] = $this->leave_adjust($data_array[$i], $adjustable_leave_amt);
+						$data_array[$i]->late = ($data_array[$i]->late % 3);
+						$data_array[$i]->half = 0;
+					}
+
+					$new_balance[] = array(
+
+						"balance_dt" => date('Y-m-d'),
+						"emp_no" => $this->input->post('emp_code')[$i],
+						"cl" => $data_array[$i]->cl,
+						"el" => $data_array[$i]->el,
+						"ml" => $data_array[$i]->ml,
+						"hl" => $data_array[$i]->hl,
+						"lwp" => $data_array[$i]->lwp
+					);
+
+					$new_data[] = array(
+						
+						"trans_dt"    		=> date('Y-m-d'),
+	
+						"attn_dt"			=> date('Y-m-d'),
+	
+						"emp_cd"			=> $data_array[$i]->emp_code,
+	
+						"emp_name"			=> $this->input->post('emp_name')[$i],
+	
+						"status"			=> ($data_array[$i]->late > 0)? 'L':'A',
+	
+						"no_of_days"		=> $data_array[$i]->late,
+	
+						"remarks"			=> "Adjustment",
+	
+						"adj_flag"			=> 'U',
+	
+						"created_by"		=> $this->session->userdata('loggedin')->emp_name,
+	
+						"created_dt"		=> date("Y-m-d h:i:s")
+					);
+	
+				}
+
+				$this->AttnModel->f_insert_multiple('td_in_out', $new_data);
+				$this->AttnModel->f_insert_multiple('td_leave_balance', $new_balance);
+				$this->AttnModel->f_insert('td_adjustment_dates', array("adjustment_date" => date('Y-m-d')));
+				
+				redirect('attendance/adjustment');
 			}
 			else{
 
@@ -241,13 +313,35 @@
 				//All employee's closing leave balances
 				$data['leave_bals'] = $this->AttnModel->f_closing_leave_bals();
 
-				// echo "<pre>";
-				// var_dump($data['adjustable']);die;
 				$this->load->view('templetes/welcome_header',$title);
 				$this->load->view('adjustment/form', $data);
 	            $this->load->view('templetes/welcome_footer');
 
 			}
+		}
+
+		public function leave_adjust($emp_details, $deduct_amt){
+			$temp = 0;
+			if($emp_details->cl > 0){
+				$temp = $emp_details->cl;
+				$emp_details->cl = (($emp_details->cl - $deduct_amt) >= 0)? ($emp_details->cl - $deduct_amt) : 0;
+				$deduct_amt = (($deduct_amt - $temp) >= 0)? $deduct_amt - $temp : 0;
+			}
+			if($emp_details->el > 0 && ($deduct_amt > 0)){
+				$temp = $emp_details->el;
+				$emp_details->el = (($emp_details->el - $deduct_amt) >= 0)? ($emp_details->el - $deduct_amt) : 0;
+				$deduct_amt = (($deduct_amt - $temp) >= 0)? $deduct_amt - $temp : 0;								
+			}
+			if($emp_details->hl > 0 && ($deduct_amt > 0)){
+				$temp = $emp_details->hl;
+				$emp_details->hl = (($emp_details->hl - $deduct_amt) >= 0)? ($emp_details->hl - $deduct_amt) : 0;
+				$deduct_amt = (($deduct_amt - $temp) >= 0)? $deduct_amt - $temp : 0;								
+			}
+			if($deduct_amt > 0){
+				$emp_details->lwp = $emp_details->lwp + $deduct_amt;
+			}
+			
+			return $emp_details;
 		}
 	}
 ?>

@@ -230,7 +230,7 @@
 
 			$data['alldata']  = $this->LeaveModel->leaveDetails($from_date,$to_date,$emp_no);
 			$data['opndata']  = $this->LeaveModel->lvopn_bal($from_date,$emp_no);
-			$data['clsdata']  = $this->LeaveModel->lvopn_bal($to_date,$emp_no);
+			$data['clsdata']  = $this->LeaveModel->lvcls_bal($to_date,$emp_no);
 
 			$data['emp_dtls'] = $this->AdminProcess->getDetailsbyEmpNo($t_name,$emp_no);
 			$data['date'] 	  = $this->AdminProcess->get_dt();

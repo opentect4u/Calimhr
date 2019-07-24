@@ -31,6 +31,32 @@
 	
 		}
 
+		public function f_insert($table_name, $data_array) {
+
+			$this->db->insert($table_name, $data_array);
+	
+			return;
+	
+		}
+		
+		public function f_edit($table_name, $data_array, $where) {
+	
+			$this->db->where($where);
+			$this->db->update($table_name, $data_array);
+	
+			return;
+	
+		}
+
+		public function f_insert_multiple($table_name, $data_array){
+
+			$this->db->insert_batch($table_name, $data_array);
+	
+			return;
+	
+		}
+	
+
 		public function AttnTrans(){			/*All Entries entered on a particular date(attn)*/
 			$this->db->select('*');
 			$this->db->where('adj_flag','U');
@@ -109,31 +135,17 @@
 
 			// //Counting Late
 			$where = array(
-				"status = 'L' OR status = 'R'" => NULL,
-				"attn_dt > '".$last_adjusted_dt."' AND attn_dt <= '".date('Y-m-d')."' GROUP BY emp_cd, emp_name" => NULL
+				"attn_dt >= '".$last_adjusted_dt."'" => NULL,
+				"(status = 'L' OR status = 'R') GROUP BY emp_cd, emp_name" => NULL
 			);
-			$data['lates'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'COUNT(status) late'), $where, 0);
+			$data['lates'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'SUM(no_of_days) late'), $where, 0);
 
 			//Counting Half
 			$where = array(
 				"status = 'H'" => NULL,
-				"attn_dt > '".$last_adjusted_dt."' AND attn_dt <= '".date('Y-m-d')."' GROUP BY emp_cd, emp_name" => NULL
+				"attn_dt >= '".$last_adjusted_dt."' AND attn_dt < '".date('Y-m-d')."' GROUP BY emp_cd, emp_name" => NULL
 			);
-			$data['halfs'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'COUNT(status) half'), $where, 0);
-
-			//Counting Holiday Half
-			$where = array(
-				"status = 'O'" => NULL,
-				"attn_dt > '".$last_adjusted_dt."' AND attn_dt <= '".date('Y-m-d')."' GROUP BY emp_cd, emp_name" => NULL
-			);
-			$data['holiday_halfs'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'COUNT(status) holiday_half'), $where, 0);
-
-			//Counting Holiday Full
-			$where = array(
-				"status = 'F'" => NULL,
-				"attn_dt > '".$last_adjusted_dt."' AND attn_dt <= '".date('Y-m-d')."' GROUP BY emp_cd, emp_name" => NULL
-			);
-			$data['holiday_fulls'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'COUNT(status) holiday_full'), $where, 0);
+			$data['halfs'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'SUM(no_of_days) half'), $where, 0);
 
 			return $data;
 		}
@@ -147,7 +159,7 @@
 					WHERE a.emp_no = b.emp_no
 					AND a.balance_dt = b.balance_dt
 					AND a.emp_no = m.emp_no 
-					ORDER BY CAST(a.emp_no as int)";
+					ORDER BY CAST(a.emp_no as unsigned)";
 
 			return $this->db->query($sql)->result();		
 
