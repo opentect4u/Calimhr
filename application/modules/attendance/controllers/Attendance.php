@@ -255,6 +255,19 @@
 						$data_array[$i]->half = 0;
 					}
 
+					if(($data_array[$i]->hl > 0) && ($data_array[$i]->hl > $data_array[$i]->lwp)){
+						$data_array[$i]->hl = $data_array[$i]->hl - $data_array[$i]->lwp;
+						$data_array[$i]->lwp = 0;
+					}
+					if(($data_array[$i]->hl > 0) && ($data_array[$i]->hl < $data_array[$i]->lwp)){
+						$data_array[$i]->lwp = $data_array[$i]->lwp - $data_array[$i]->hl;
+						$data_array[$i]->hl = 0;
+					}
+					if(($data_array[$i]->hl > 0) && ($data_array[$i]->hl == $data_array[$i]->lwp)){
+						$data_array[$i]->lwp = 0;
+						$data_array[$i]->hl = 0;
+					}
+
 					$new_balance[] = array(
 
 						"balance_dt" => date('Y-m-d'),
