@@ -135,7 +135,7 @@
 
 			// //Counting Late
 			$where = array(
-				"attn_dt >= '".$last_adjusted_dt."'" => NULL,
+				"trans_dt >= '".$last_adjusted_dt."'" => NULL,
 				"(status = 'L' OR status = 'R') GROUP BY emp_cd, emp_name" => NULL
 			);
 			$data['lates'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'SUM(no_of_days) late'), $where, 0);
@@ -143,7 +143,7 @@
 			//Counting Half
 			$where = array(
 				"status = 'H'" => NULL,
-				"attn_dt >= '".$last_adjusted_dt."' AND attn_dt < '".date('Y-m-d')."' GROUP BY emp_cd, emp_name" => NULL
+				"trans_dt >= '".$last_adjusted_dt."' AND trans_dt < '".date('Y-m-d')."' GROUP BY emp_cd, emp_name" => NULL
 			);
 			$data['halfs'] = $this->f_get_particulars('td_in_out', array('emp_cd', 'emp_name', 'SUM(no_of_days) half'), $where, 0);
 

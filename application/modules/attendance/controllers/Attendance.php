@@ -226,6 +226,7 @@
 			if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 				$this->AttnModel->f_edit('td_in_out', array('adj_flag' => 'A'), array("attn_dt BETWEEN '".$this->input->post('last_adjust_date')."' AND '".$this->input->post('latest_adjust_date')."'" => NULL));
+				$maxSl  = $this->AttnModel->max_sl(date('Y-m-d'))->sl_no;
 
 				for($i = 0; $i < count($this->input->post('emp_code')); $i++){
 					
@@ -244,7 +245,7 @@
 				}
 
 				for($i = 0; $i < count($this->input->post('emp_code')); $i++){
-
+					++$maxSl;
 					$adjustable_leave_amt = 0;
 					$adjustable_leave_amt += round(($data_array[$i]->late >= 3)? ($data_array[$i]->late / 3) : 0, 0);
 					$adjustable_leave_amt += $data_array[$i]->half * 0.5;
@@ -284,6 +285,8 @@
 						"trans_dt"    		=> date('Y-m-d'),
 	
 						"attn_dt"			=> date('Y-m-d'),
+						
+						"sl_no"				=> $maxSl,
 	
 						"emp_cd"			=> $data_array[$i]->emp_code,
 	
@@ -300,12 +303,32 @@
 						"created_by"		=> $this->session->userdata('loggedin')->emp_name,
 	
 						"created_dt"		=> date("Y-m-d h:i:s")
+						
 					);
+
+					if($data_array[$i]->late > 0){
+						
+						$new_td_dates[] = array(
+	
+							"trans_dt"    	=> date('Y-m-d'),
+
+							"attn_dt"		=>	date('Y-m-d'),
+
+							"sl_no"			=> $maxSl,
+
+							"emp_cd"		=> $data_array[$i]->emp_code,
+
+							"status"		=> 'L'
+	
+						);
+
+					}
 	
 				}
 
 				$this->AttnModel->f_insert_multiple('td_in_out', $new_data);
 				$this->AttnModel->f_insert_multiple('td_leave_balance', $new_balance);
+				$this->AttnModel->f_insert_multiple('td_dates', $new_td_dates);
 				$this->AttnModel->f_insert('td_adjustment_dates', array("adjustment_date" => date('Y-m-d')));
 				
 				redirect('attendance/adjustment');
