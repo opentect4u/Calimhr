@@ -109,7 +109,7 @@
 
 					"in_out_time"		=> $this->input->post('in_out_time'),
 
-					"no_of_days"		=> $this->input->post('days'),
+					"no_of_days"		=> ($this->input->post('status') == 'L' || $this->input->post('status') == 'R')? 1 : $this->input->post('days'),
 
 					"remarks"			=> trim($this->input->post('remarks')),
 
