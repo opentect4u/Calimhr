@@ -225,7 +225,7 @@
 
 			if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-				$this->AttnModel->f_edit('td_in_out', array('adj_flag' => 'A'), array("attn_dt BETWEEN '".$this->input->post('last_adjust_date')."' AND '".$this->input->post('latest_adjust_date')."'" => NULL));
+				$this->AttnModel->f_edit('td_in_out', array('adj_flag' => 'A'), array("trans_dt BETWEEN '".$this->input->post('last_adjust_date')."' AND '".$this->input->post('latest_adjust_date')."'" => NULL));
 				$maxSl  = $this->AttnModel->max_sl(date('Y-m-d'))->sl_no;
 
 				for($i = 0; $i < count($this->input->post('emp_code')); $i++){
