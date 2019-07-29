@@ -11,25 +11,25 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" width="100%" cellspacing="0">
               <thead>
-		<tr>
-		  <th>Date</th>
-		  <th>Year</th>
-		  <th>Month</th>
-            	  <th>Gross Amount</th>
-		  <th>Net Amount</th>
-		  <th>Print</th> 
-                </tr>
-              </thead>
-              <tfoot>
-		<tr>
-		  <th>Date</th>	
+                <tr>
+                  <th>Date</th>
                   <th>Year</th>
                   <th>Month</th>
                   <th>Gross Amount</th>
-		  <th>Net Amount</th>
-		  <th>Print</th>	
+                  <th>Net Amount</th>
+                  <th>Print</th> 
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Date</th>
+                  <th>Year</th>
+                  <th>Month</th>
+                  <th>Gross Amount</th>
+                  <th>Net Amount</th>
+                  <th>Print</th> 
                 </tr>
               </tfoot>
               <tbody>

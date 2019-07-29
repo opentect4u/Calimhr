@@ -84,18 +84,16 @@
 	                    <th class="noborder" width="25%"></th>
 	                    <th class="noborder" width="1%"></th>
 	                    <th class="noborder" width="15%"></th>
-	                    <th class="noborder" width="1%"></th>
-	                    <th class="noborder" width="25%"></th>
+	                    <th class="noborder" width="45%"></th>
 	                </tr>
 
 	                <tr>
 	                    <td>Employee No.</td>
 	                    <td class="left_algn">:</td>
-	                    <td class="left_algn"><?php echo $emp_dtls->emp_no; ?></td>
+	                    <td class="left_algn"> <?php echo $emp_dtls->emp_no; ?></td>
 	                    <td></td>
 	                    <td >PAN No.</td>
-	                    <td class="left_algn">:<?php echo $emp_dtls->pan_no; ?></td>
-	                    <td></td>
+	                    <td class="left_algn">: <?php echo $emp_dtls->pan_no; ?></td>
 
 	                </tr>
 
@@ -103,22 +101,20 @@
 
 	                    <td>Department</td>
 	                    <td class="left_algn">:</td>
-	                    <td class="left_algn"><?php echo $emp_dtls->sector; ?></td>
+	                    <td class="left_algn"> <?php echo $emp_dtls->sector; ?></td>
 	                    <td></td>
 	                    <td>Bank A/C No.</td>
-	                    <td class="left_algn">:</td>
-	                    <td class="left_algn"><?php echo $emp_dtls->bank_ac_no; ?></td>
+	                    <td class="left_algn">: <?php echo $emp_dtls->bank_ac_no; ?></td>
 
 	                </tr>
 
 	                <tr>
 	                    <td>Designation</td>
 	                    <td class="left_algn">:</td>
-	                    <td class="left_algn"><?php echo $emp_dtls->designation; ?></td>
+	                    <td class="left_algn"> <?php echo $emp_dtls->designation; ?></td>
 	                    <td></td>
 	                    <td>PF A/C No.</td>
-	                    <td class="left_algn">:</td>
-	                    <td class="left_algn"><?php echo $emp_dtls->pf_ac_no; ?></td>
+	                    <td class="left_algn">: <?php echo $emp_dtls->pf_ac_no; ?></td>
 
 	                </tr>
 
@@ -126,11 +122,10 @@
 
 	                    <td>Date of Joining</td>
 	                    <td class="left_algn">:</td>
-	                    <td class="left_algn"><?php if (isset($emp_dtls->date_of_joining)){ echo date( 'd/m/Y', strtotime($emp_dtls->date_of_joining)); } ?></td>
+	                    <td class="left_algn"> <?php if (isset($emp_dtls->date_of_joining)){ echo date( 'd/m/Y', strtotime($emp_dtls->date_of_joining)); } ?></td>
 	                    <td></td>
 	                    <td>ESI No.</td>
-	                    <td class="left_algn">:</td>
-	                    <td class="left_algn"><?php echo $emp_dtls->esi_no; ?></td>
+	                    <td class="left_algn">: <?php echo $emp_dtls->esi_no; ?></td>
 
 	                </tr>
 
@@ -250,7 +245,7 @@
 
 	            <div>
 	            	
-	            	<strong>Net Ammount: <?php echo $data_dtls->net_amt; ?> ( <font size="4.5"><?php echo getIndianCurrency($data_dtls->net_amt);?></font>)</strong>
+	            	<strong>Net Amount: <?php echo $data_dtls->net_amt; ?> ( <font size="4.5"><?php echo getIndianCurrency($data_dtls->net_amt);?></font>)</strong>
 
 	            </div>
                   
