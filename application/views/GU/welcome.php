@@ -9,8 +9,7 @@
           </a>
           <div class="col-12">
             <h1 class="lead" style="Monotype Corsiva">Synergic Softek Solutions Pvt. Ltd.</h1>
-            <p class="align-items-center lead">55 D, Desapran Sasmal Road, Kolkata, West Bengal 700033
-          </p>
+            <p class="align-items-center lead"><span>55 D, Desapran Sasmal Road</span> <span>KOLKATA-33</span></p>
           <br>
           </div>
           

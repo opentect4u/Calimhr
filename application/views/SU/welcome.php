@@ -8,7 +8,7 @@
           </a>
           <div class="col-12">
             <h1 class="lead">Synergic Softek Solutions Pvt. Ltd.</h1>
-            <p class="align-items-center lead">55 D, Desapran Sasmal Road, Kolkata, West Bengal 700033 <br>
+            <p class="align-items-center lead"><span>55 D, Desapran Sasmal Road</span> <span>KOLKATA-33</span>
             An ISO 9001:2008 certified company.
           </p>
           </div>

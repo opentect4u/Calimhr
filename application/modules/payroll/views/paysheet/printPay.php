@@ -63,7 +63,8 @@
 
                 <h3>Synergic Softek Solutions Pvt.Ltd.</h3>
 
-                <h4>55D,Desapran Sasmal Road,Kolkata-700033</h4>
+                <h4><span>55 D, Desapran Sasmal Road</span> <br>
+					<span>KOLKATA-33</span></h4>
 				<h4><?php echo $emp_dtls->emp_name; ?></h4>
 
 				<h5>Pay Slip for <?php echo date('F',strtotime("2012-$data_dtls->sal_month-01")).' - '.
