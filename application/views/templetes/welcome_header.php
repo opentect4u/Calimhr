@@ -176,6 +176,9 @@
             <li>
               <a class="nav-link" href="<?php echo site_url('attendance/adjustment')?>"><strong>Leave Adjustment</strong></a>
             </li>
+            <li>
+              <a class="nav-link" href="<?php echo site_url('attendance/lopenbal')?>">Add Leave Balance</a>
+            </li>
           <?php } ?>
 
           <li>

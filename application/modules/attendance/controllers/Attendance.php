@@ -109,7 +109,7 @@
 
 					"in_out_time"		=> $this->input->post('in_out_time'),
 
-					"no_of_days"		=> ($this->input->post('status') == 'L' || $this->input->post('status') == 'R')? 1 : $this->input->post('days'),
+					"no_of_days"		=> ($this->input->post('status') == 0)? 1 : $this->input->post('status'),
 
 					"remarks"			=> trim($this->input->post('remarks')),
 
@@ -247,9 +247,9 @@
 				for($i = 0; $i < count($this->input->post('emp_code')); $i++){
 					++$maxSl;
 					$adjustable_leave_amt = 0;
-					$adjustable_leave_amt += round(($data_array[$i]->late >= 3)? ($data_array[$i]->late / 3) : 0, 0);
+					$adjustable_leave_amt += floor((($data_array[$i]->late >= 3)? ($data_array[$i]->late / 3) : 0));
 					$adjustable_leave_amt += $data_array[$i]->half * 0.5;
-							
+					
 					if($adjustable_leave_amt > 0){
 						$data_array[$i] = $this->leave_adjust($data_array[$i], $adjustable_leave_amt);
 						$data_array[$i]->late = ($data_array[$i]->late % 3);
@@ -268,9 +268,9 @@
 						$data_array[$i]->lwp = 0;
 						$data_array[$i]->hl = 0;
 					}
-
+					
 					$new_balance[] = array(
-
+						
 						"balance_dt" => date('Y-m-d'),
 						"emp_no" => $this->input->post('emp_code')[$i],
 						"cl" => $data_array[$i]->cl,
@@ -279,33 +279,33 @@
 						"hl" => $data_array[$i]->hl,
 						"lwp" => $data_array[$i]->lwp
 					);
-
+					
 					$new_data[] = array(
 						
 						"trans_dt"    		=> date('Y-m-d'),
-	
+						
 						"attn_dt"			=> date('Y-m-d'),
 						
 						"sl_no"				=> $maxSl,
-	
+						
 						"emp_cd"			=> $data_array[$i]->emp_code,
-	
+						
 						"emp_name"			=> $this->input->post('emp_name')[$i],
-	
+						
 						"status"			=> ($data_array[$i]->late > 0)? 'L':'A',
-	
+						
 						"no_of_days"		=> $data_array[$i]->late,
-	
+						
 						"remarks"			=> "Adjustment",
-	
+						
 						"adj_flag"			=> 'U',
-	
+						
 						"created_by"		=> $this->session->userdata('loggedin')->emp_name,
-	
+						
 						"created_dt"		=> date("Y-m-d h:i:s")
 						
 					);
-
+					
 					if($data_array[$i]->late > 0){
 						
 						$new_td_dates[] = array(
@@ -325,7 +325,7 @@
 					}
 	
 				}
-
+				
 				$this->AttnModel->f_insert_multiple('td_in_out', $new_data);
 				$this->AttnModel->f_insert_multiple('td_leave_balance', $new_balance);
 				$this->AttnModel->f_insert_multiple('td_dates', $new_td_dates);
@@ -378,6 +378,48 @@
 			}
 			
 			return $emp_details;
+		}
+
+		public function lopenbal(){
+			
+			if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+				$data_array = array(
+					"balance_dt" => $this->input->post('date'),
+					"emp_no" => $this->input->post('emp_code'),
+					"cl" => $this->input->post('cl'),
+					"el" => $this->input->post('el'),
+					"ml" => $this->input->post('ml'),
+					"hl" => $this->input->post('hl'),
+					"lwp" => $this->input->post('lwp')
+				);
+
+				$this->AttnModel->f_insert('td_leave_balance', $data_array);
+
+				$this->session->set_flashdata('msg', 'success');
+
+				redirect('attendance/lopenbal');
+
+			}
+			else {
+
+				$title['title']      	= 'Leave-Opening Balance';
+				$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
+				$title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
+				$title['total_reject']  = $this->Process->countRejClaim('tm_claim');
+
+				//Employee List
+				$data['emp_list'] = $this->AttnModel->f_get_particulars('mm_employee', array('emp_no', 'emp_name'), NULL, 0);
+
+				$this->load->view('templetes/welcome_header', $title);
+				$this->load->view('openingbal/openingbal', $data);
+	            $this->load->view('templetes/welcome_footer');
+			}
+		}
+
+		public function getdoj(){
+			echo $this->AttnModel->f_get_particulars('mm_employee', array('date_of_joining'), array('emp_no' => $this->input->get('emp_cd')), 1)->date_of_joining;
+			exit();	 
 		}
 	}
 ?>
