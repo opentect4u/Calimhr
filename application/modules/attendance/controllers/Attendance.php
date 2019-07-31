@@ -305,30 +305,11 @@
 						"created_dt"		=> date("Y-m-d h:i:s")
 						
 					);
-					
-					if($data_array[$i]->late > 0){
-						
-						$new_td_dates[] = array(
-	
-							"trans_dt"    	=> date('Y-m-d'),
-
-							"attn_dt"		=>	date('Y-m-d'),
-
-							"sl_no"			=> $maxSl,
-
-							"emp_cd"		=> $data_array[$i]->emp_code,
-
-							"status"		=> 'L'
-	
-						);
-
-					}
 	
 				}
 				
 				$this->AttnModel->f_insert_multiple('td_in_out', $new_data);
 				$this->AttnModel->f_insert_multiple('td_leave_balance', $new_balance);
-				$this->AttnModel->f_insert_multiple('td_dates', $new_td_dates);
 				$this->AttnModel->f_insert('td_adjustment_dates', array("adjustment_date" => date('Y-m-d')));
 				
 				redirect('attendance/adjustment');

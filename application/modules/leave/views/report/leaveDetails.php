@@ -76,8 +76,8 @@
 	                		<tr>
 			                	<th>Date</th>
                         <th>Type</th>
-                        <th>Time</th>
-			                  <th>Remarks</th>
+                        <!-- <th>Time</th>
+			                  <th>Remarks</th> -->
 	                		</tr>
 	              		</thead>
 	              		<tbody>
@@ -111,8 +111,8 @@
                                                     }
                                              ?>
                           </td>
-			                  	<td class="center"><?php echo $aldta->ent_time;?></td>   
-                          <td class="center"><?php echo $aldta->remarks;?></td>
+			                  	<!-- <td class="center"><?php echo $aldta->ent_time;?></td>   
+                          <td class="center"><?php echo $aldta->remarks;?></td> -->
 			                </tr>
 			                <?php	 
                         endforeach;

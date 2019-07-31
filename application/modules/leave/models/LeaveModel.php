@@ -113,13 +113,10 @@
 	}
 
 	public function leaveDetails($from_date,$to_date,$emp_no){
-			$query = $this->db->query("select a.attn_dt attn_dt,a.status status,a.sl_no,a.emp_cd,
-									          b.in_out_time ent_time,b.remarks remarks
-									   from   td_dates a,td_in_out b
-									   where  a.attn_dt = b.attn_dt
-									   and    a.sl_no   = b.sl_no
-									   and    a.emp_cd  = $emp_no
-									   and    a.attn_dt between '$from_date' and '$to_date'");
+			$query = $this->db->query("select  attn_dt, status,sl_no,emp_cd
+									   from   td_dates 
+									   where emp_cd  = $emp_no
+									   and   attn_dt between '$from_date' and '$to_date'");
 
 			$this->set_dt($from_date,$to_date);
 
