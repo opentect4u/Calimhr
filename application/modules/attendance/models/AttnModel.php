@@ -155,11 +155,15 @@
 
 			$sql = "SELECT a.*, m.emp_name FROM 
 					(SELECT `emp_no`, `sl_no`, `cl`, `el`, `ml`, `hl`, `lwp`, `balance_dt` FROM td_leave_balance) a,
-					(SELECT `emp_no`, MAX(`sl_no`) `sl_no`, MAX(`balance_dt`) balance_dt FROM td_leave_balance GROUP BY emp_no) b,
+					(SELECT MAX(t.`balance_dt`) balance_dt, t.`emp_no`, t.`sl_no` FROM td_leave_balance t
+					WHERE t.sl_no = (SELECT MAX(sl_no) FROM td_leave_balance WHERE emp_no = t.emp_no AND 
+																				balance_dt = (SELECT MAX(balance_dt) FROM td_leave_balance 
+																				WHERE emp_no = t.emp_no))
+					GROUP BY t.emp_no) b,
 					mm_employee m
-					WHERE a.emp_no = b.emp_no
-					AND a.balance_dt = b.balance_dt
-					AND a.sl_no = b.sl_no
+					WHERE a.emp_no = b.emp_no 
+					AND a.balance_dt = b.balance_dt 
+					AND a.sl_no = b.sl_no 
 					AND a.emp_no = m.emp_no 
 					ORDER BY CAST(a.emp_no as unsigned)";
 
