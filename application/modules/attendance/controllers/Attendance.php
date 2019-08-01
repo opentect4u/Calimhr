@@ -109,7 +109,7 @@
 
 					"in_out_time"		=> $this->input->post('in_out_time'),
 
-					"no_of_days"		=> ($this->input->post('status') == 0)? 1 : $this->input->post('status'),
+					"no_of_days"		=> ($this->input->post('days') == 0)? 1 : $this->input->post('days'),
 
 					"remarks"			=> trim($this->input->post('remarks')),
 
@@ -122,8 +122,7 @@
 
 				$this->AttnModel->insert_status('td_in_out',$data_array);
 
-
-				if($this->input->post('status')=='A'||$this->input->post('status')=='C'){
+				if($this->input->post('status')=='A' || $this->input->post('status')=='C'){
 
 					for($i=0; $i < $days; $i++){
 
@@ -273,6 +272,7 @@
 						
 						"balance_dt" => date('Y-m-d'),
 						"emp_no" => $this->input->post('emp_code')[$i],
+						"sl_no" => 1,
 						"cl" => $data_array[$i]->cl,
 						"el" => $data_array[$i]->el,
 						"ml" => $data_array[$i]->ml,

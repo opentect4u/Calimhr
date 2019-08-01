@@ -78,6 +78,9 @@
                         <th>Type</th>
                         <!-- <th>Time</th>
 			                  <th>Remarks</th> -->
+                        <th>In/Out Time</th>
+                        <th>No of days</th>
+                        <th>Status</th>
 	                		</tr>
 	              		</thead>
 	              		<tbody>
@@ -111,8 +114,16 @@
                                                     }
                                              ?>
                           </td>
-			                  	<!-- <td class="center"><?php echo $aldta->ent_time;?></td>   
-                          <td class="center"><?php echo $aldta->remarks;?></td> -->
+			                  	<td class="center"><?php echo $aldta->in_out_time;?></td>   
+			                  	<td class="center"><?php echo $aldta->no_of_days;?></td>   
+                          <td class="center"><?php if(($aldta->adj_flag == 'U') && ($aldta->no_of_days == 0)){
+                                                    echo ''; 
+                                                  }
+                                                  else if(($aldta->adj_flag == 'U') && ($aldta->no_of_days > 0)){
+                                                    echo 'Unadjusted';
+                                                  }else{
+                                                    echo 'Adjusted';
+                                                  } ?></td>
 			                </tr>
 			                <?php	 
                         endforeach;

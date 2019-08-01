@@ -113,10 +113,11 @@
 	}
 
 	public function leaveDetails($from_date,$to_date,$emp_no){
-			$query = $this->db->query("select  attn_dt, status,sl_no,emp_cd
-									   from   td_dates 
+			$query = $this->db->query("select  attn_dt, status, in_out_time, no_of_days, adj_flag
+									   from   td_in_out 
 									   where emp_cd  = $emp_no
-									   and   attn_dt between '$from_date' and '$to_date'");
+									   and   attn_dt between '$from_date' and '$to_date'
+									   ORDER BY attn_dt, sl_no");
 
 			$this->set_dt($from_date,$to_date);
 
@@ -189,6 +190,11 @@
 				where  balance_dt = (select max(balance_dt) from td_leave_balance
 									 where  balance_dt <= '$to_dt'
 									 and    emp_no     = $emp_no)
+				and sl_no = (select max(sl_no) from td_leave_balance
+										where  balance_dt <= (select max(balance_dt) from td_leave_balance
+										where  balance_dt <= '$to_dt'
+										and    emp_no     = $emp_no)
+				and    emp_no     = $emp_no)
 				and    emp_no     = $emp_no";
 
 		$query = $this->db->query($sql);

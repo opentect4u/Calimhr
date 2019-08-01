@@ -154,11 +154,12 @@
 		public function f_closing_leave_bals(){
 
 			$sql = "SELECT a.*, m.emp_name FROM 
-					(SELECT `emp_no`, `cl`, `el`, `ml`, `hl`, `lwp`, `balance_dt` FROM td_leave_balance) a,
-					(SELECT `emp_no`, MAX(balance_dt) balance_dt FROM td_leave_balance GROUP BY emp_no) b,
+					(SELECT `emp_no`, `sl_no`, `cl`, `el`, `ml`, `hl`, `lwp`, `balance_dt` FROM td_leave_balance) a,
+					(SELECT `emp_no`, MAX(`sl_no`) `sl_no`, MAX(`balance_dt`) balance_dt FROM td_leave_balance GROUP BY emp_no) b,
 					mm_employee m
 					WHERE a.emp_no = b.emp_no
 					AND a.balance_dt = b.balance_dt
+					AND a.sl_no = b.sl_no
 					AND a.emp_no = m.emp_no 
 					ORDER BY CAST(a.emp_no as unsigned)";
 
