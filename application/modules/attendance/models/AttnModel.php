@@ -60,6 +60,7 @@
 		public function AttnTrans(){			/*All Entries entered on a particular date(attn)*/
 			$this->db->select('*');
 			$this->db->where('adj_flag','U');
+			$this->db->where('status !=','A');
 			$data = $this->db->get('td_in_out');
 			return $data->result();	
 		}
