@@ -14,6 +14,8 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
+                  <th style="display:none;">Year</th>
+                  <th style="display:none;">Month</th>
                   <th>Date</th>
     		  		    <th>Status</th>
     		  		    <th>Details</th>
@@ -21,6 +23,8 @@
               </thead>
               <tfoot>
                 <tr>
+                  <th style="display:none;">Year</th>
+                  <th style="display:none;">Month</th>
                   <th>Date</th>
 		  		        <th>Status</th>
 		  		        <th>Details</th>
@@ -30,6 +34,8 @@
 				<?php if($dtls){
                    	foreach ($dtls as $values):?>
                 <tr>
+          <td style="display:none;"><?php echo date('Y',strtotime($values->attn_dt));?></td>
+          <td style="display:none;"><?php echo date('m',strtotime($values->attn_dt));?></td>
 					<td><?php echo date('d/m/Y',strtotime($values->attn_dt));?></td> 
 		  			<td><?php $stType = $values->status;
 			    			if($stType == 'L'){

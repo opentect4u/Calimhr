@@ -33,6 +33,18 @@
 			$user_id 			 	= $this->session->userdata('loggedin')->user_id;
 			$date				 	= date('Y-m-d');
 
+			$year 					= date("Y");
+			$month                  = date("n");
+
+			if($month >=1 and $month<=3){
+				$fr_year 	=  ($year - 1);
+			}else{
+				$fr_year	=  $year;	
+			}
+
+			echo "<pre>";
+			var_dump($month);die;
+
 			$data['dtls']   	 	= $this->AttnModel->attn_view($user_id);
 
 			$title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');

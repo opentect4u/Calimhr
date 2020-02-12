@@ -14,6 +14,7 @@
             <table class="table table-bordered" width="100%" cellspacing="0">
               <thead>
                 <tr>
+                  <th>Sl</th>
                   <th>Date</th>
                   <th>Year</th>
                   <th>Month</th>
@@ -24,6 +25,7 @@
               </thead>
               <tfoot>
                 <tr>
+                  <th>Sl</th>
                   <th>Date</th>
                   <th>Year</th>
                   <th>Month</th>
@@ -34,9 +36,11 @@
               </tfoot>
               <tbody>
 	      <?php if($data_dtls){
-	      	    foreach ($data_dtls as $values):
+                $i=1;
+              foreach ($data_dtls as $values):
               ?>
                 <tr>
+       <td><?php echo $i; ?></td>         
 		  <td><?php echo date('d/m/Y',strtotime($values->trans_dt));?></td>
                   <td><?php echo $values->sal_year;?></td>
 		  <td><?php
@@ -91,6 +95,7 @@
 		  </td>
                 </tr>
                 <?php
+                 $i++;
                 endforeach;
                 } 
               ?>

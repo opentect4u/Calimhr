@@ -198,7 +198,8 @@
 	   public function printPs(){
 		   $title['title']         = 'Claim-View Paysheet';
 		   $user_id 		   = $this->session->userdata('loggedin')->user_id;
-		   $data['data_dtls']      = $this->PayrollModel->print_ps($user_id);	
+		   $year     = date("Y");
+		   $data['data_dtls']      = $this->PayrollModel->print_ps($user_id,$year);	
 		   $title['total_claim']   = $this->AdminProcess->countClaim('mm_manager');
 		   $title['total_payment'] = $this->AdminProcess->countRow('tm_payment');
 		   $title['total_reject']  = $this->Process->countRejClaim('tm_claim');

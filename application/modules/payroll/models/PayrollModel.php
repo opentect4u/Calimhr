@@ -40,12 +40,17 @@
 				return $data->result();
 			}
 											/*Select data for an emp to print paysheet*/
-			public function print_ps($emp_no){						
+			public function print_ps($emp_no,$year){						
 				$this->db->select('*');
 				$this->db->where('emp_no',$emp_no);
+				$this->db->where('sal_month >=',1);
+				$this->db->where('sal_month <=',12);
+				$this->db->where('sal_year',$year);
 				$this->db->order_by("trans_dt", 'desc');				
 				$data=$this->db->get('tm_paysheet');
 				return $data->result();
+
+
 			}
 
 			public function payslip($emp_no, $trans_dt){
